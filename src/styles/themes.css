@@ -1,0 +1,99 @@
+@layer base {
+  html,
+  body {
+    scrollbar-gutter: stable;
+  }
+  :root,
+  .light {
+    --color-white: 0, 0%, 100%;
+    --color-gray-50: 204, 45%, 98%;
+    --color-gray-100: 210, 31%, 95%;
+    --color-gray-200: 215, 27%, 91%;
+    --color-gray-300: 213, 22%, 84%;
+    --color-gray-400: 214, 18%, 69%;
+    --color-gray-500: 217, 13%, 52%;
+    --color-gray-600: 219, 15%, 35%;
+    --color-gray-700: 220, 20%, 23%;
+    --color-gray-800: 221, 23%, 14%;
+    --color-gray-900: 229, 19%, 11%;
+    --color-black: 0, 0%, 0%;
+
+    --color-content-base: var(--color-gray-600);
+    --color-content-weak: var(--color-gray-400);
+    --color-content-strong: var(--color-gray-800);
+    --color-content-inverted: var(--color-gray-200);
+
+    --color-body: var(--color-gray-50);
+    --color-body-50: var(--color-gray-100);
+    --color-body-100: var(--color-gray-200);
+    --color-body-200: var(--color-gray-300);
+
+    --color-primary-base: 339, 91%, 51%;
+    --color-primary-effect: 339, 91%, 62%;
+    --color-primary-content: 340, 95%, 97%;
+
+    --color-secondary-base: 250, 75%, 59%;
+    --color-secondary-effect: 250, 84%, 67%;
+    --color-secondary-content: 250, 90%, 97%;
+
+    --color-neutral-base: var(--color-gray-700);
+    --color-neutral-effect: var(--color-gray-600);
+    --color-neutral-content: var(--color-gray-50);
+
+    --color-success-base: 155, 76%, 33%;
+    --color-success-effect: 155, 71%, 42%;
+    --color-success-content: 155, 72%, 97%;
+
+    --color-error-base: 347, 77%, 50%;
+    --color-error-effect: 350, 89%, 60%;
+    --color-error-content: 345, 85%, 97%;
+
+    --color-warning-base: 41, 96%, 40%;
+    --color-warning-effect: 45, 93%, 47%;
+    --color-warning-content: 45, 90%, 97%;
+
+    --color-info-base: 200, 98%, 39%;
+    --color-info-effect: 199, 89%, 48%;
+    --color-info-content: 194, 95%, 97%;
+  }
+
+  .dark {
+    --color-content-base: var(--color-gray-200);
+    --color-content-weak: var(--color-gray-400);
+    --color-content-strong: var(--color-white);
+    --color-content-inverted: var(--color-gray-800);
+
+    --color-body: var(--color-gray-900);
+    --color-body-50: var(--color-gray-800);
+    --color-body-100: var(--color-gray-700);
+    --color-body-200: var(--color-gray-600);
+
+    --color-primary-base: 339, 91%, 58%;
+    --color-primary-effect: 339, 91%, 69%;
+    --color-primary-content: 340, 95%, 97%;
+
+    --color-secondary-base: 250, 89%, 74%;
+    --color-secondary-effect: 250, 84%, 82%;
+    --color-secondary-content: 250, 90%, 10%;
+
+    --color-neutral-base: var(--color-gray-100);
+    --color-neutral-effect: var(--color-gray-300);
+    --color-neutral-content: var(--color-gray-800);
+
+    --color-success-base: 155, 69%, 58%;
+    --color-success-effect: 155, 77%, 73%;
+    --color-success-content: 155, 72%, 16%;
+
+    --color-error-base: 351, 95%, 68%;
+    --color-error-effect: 353, 96%, 77%;
+    --color-error-content: 345, 85%, 16%;
+
+    --color-warning-base: 48, 96%, 53%;
+    --color-warning-effect: 50, 98%, 64%;
+    --color-warning-content: 45, 90%, 16%;
+
+    --color-info-base: 198, 93%, 60%;
+    --color-info-effect: 199, 95%, 74%;
+    --color-info-content: 194, 95%, 16%;
+  }
+}
