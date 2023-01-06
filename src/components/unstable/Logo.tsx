@@ -1,3 +1,6 @@
+// ToDo
+// - Update props etc.
+
 export function Logomark(...props: any) {
   return (
     <div style={{ width: "50px", height: "50px" }} {...props}>

@@ -1,7 +1,6 @@
 // Radix UI component docs: https://www.radix-ui.com/docs/primitives/components/avatar
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import clsx from "clsx";
-import React from "react";
 
 //
 // Avatar group component
@@ -42,10 +41,12 @@ type AvatarProps = {
   loading?: "eager" | "lazy";
   size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
   radius?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full";
+  randomFallbackColor?: boolean;
   ringWidth?: "none" | "sm" | "md" | "lg";
   ringColor?:
     | "none"
     | "inherit"
+    | "surface"
     | "white"
     | "black"
     | "primary"
@@ -85,6 +86,7 @@ const componentVariants = {
   ringColor: {
     none: "",
     inherit: "ring-current",
+    surface: "ring-surface",
     white: "ring-white",
     black: "ring-black",
     primary: "ring-primary",
@@ -93,22 +95,43 @@ const componentVariants = {
   },
 };
 
+const randomBackgroundClasses = [
+  "bg-primary",
+  "bg-secondary",
+  "bg-red-600",
+  "bg-orange-600",
+  "bg-yellow-600",
+  "bg-green-600",
+  "bg-teal-600",
+  "bg-blue-600",
+  "bg-indigo-600",
+  "bg-purple-600",
+  "bg-pink-600",
+];
+
 export function Avatar({
   src,
   name = "John Doe",
   loading = "lazy",
   size = "md",
   radius = "full",
+  randomFallbackColor = true,
   ringColor = "none",
   ringWidth = "none",
   className = "",
   ...rest
 }: AvatarProps) {
-  // Get initials from the first and last name and save them in a variable
+  // Get initials from the first and the last name and save them in a variable
   const initials = name
     .split(" ")
     .map((n, i) => (i === 0 || i === name.split(" ").length - 1 ? n[0] : ""))
     .join("");
+
+  // Pick one of the random background colors
+  const randomBackgroundColor =
+    randomBackgroundClasses[
+      Math.floor(Math.random() * randomBackgroundClasses.length)
+    ];
 
   return (
     <AvatarPrimitive.Root
@@ -126,9 +149,21 @@ export function Avatar({
         loading={loading}
         className="h-full w-full object-cover"
       />
-      <AvatarPrimitive.Fallback className="flex h-full w-full items-center justify-center bg-content text-[1em] font-semibold leading-none text-content-inverted">
-        {initials}
-      </AvatarPrimitive.Fallback>
+
+      {randomFallbackColor ? (
+        <AvatarPrimitive.Fallback
+          className={clsx(
+            "flex h-full w-full items-center justify-center text-[1em] font-semibold uppercase leading-none text-white",
+            randomBackgroundColor
+          )}
+        >
+          {initials}
+        </AvatarPrimitive.Fallback>
+      ) : (
+        <AvatarPrimitive.Fallback className="text-body-invert flex h-full w-full items-center justify-center bg-content text-[1em] font-semibold uppercase leading-none">
+          {initials}
+        </AvatarPrimitive.Fallback>
+      )}
 
       {ringWidth !== "none" && (
         <span

@@ -5,7 +5,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type ParallaxProps = {
   children: React.ReactNode;
@@ -33,7 +33,7 @@ export default function Parallax({
   const yRange = useTransform(scrollY, [initial, final], [offset, -offset]);
   const y = useSpring(yRange, { stiffness: 400, damping: 90 });
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const element = ref.current;
     if (!element) return;
 

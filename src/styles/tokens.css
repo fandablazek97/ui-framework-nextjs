@@ -1,0 +1,85 @@
+@layer base {
+  :root {
+    /* Black & white */
+    --token-white: 0deg 0% 100%;
+    --token-black: 0deg 0% 0%;
+
+    /* Grays */
+    --token-gray-50: 204deg 45% 98%;
+    --token-gray-100: 210deg 31% 95%;
+    --token-gray-200: 215deg 27% 91%;
+    --token-gray-300: 213deg 22% 84%;
+    --token-gray-400: 214deg 18% 69%;
+    --token-gray-500: 217deg 13% 52%;
+    --token-gray-600: 219deg 15% 35%;
+    --token-gray-700: 220deg 20% 23%;
+    --token-gray-800: 221deg 23% 14%;
+    --token-gray-900: 229deg 19% 11%;
+    --token-gray-950: 229deg 19% 9%;
+
+    /* Primary */
+    --token-primary-50: 345deg 75% 97%;
+    --token-primary-100: 343deg 90% 94%;
+    --token-primary-200: 343deg 85% 89%;
+    --token-primary-300: 343deg 85% 80%;
+    --token-primary-400: 340deg 91% 70%;
+    --token-primary-500: 339deg 92% 63%;
+    --token-primary-600: 339deg 95% 51%;
+    --token-primary-700: 340deg 78% 43%;
+    --token-primary-800: 341deg 78% 36%;
+    --token-primary-900: 342deg 71% 31%;
+    --token-primary-950: 343deg 70% 18%;
+
+    /* Secondary */
+    --token-secondary-50: 138deg 62% 97%;
+    --token-secondary-100: 134deg 76% 94%;
+    --token-secondary-200: 136deg 70% 87%;
+    --token-secondary-300: 135deg 67% 77%;
+    --token-secondary-400: 132deg 58% 66%;
+    --token-secondary-500: 128deg 45% 56%;
+    --token-secondary-600: 128deg 37% 46%;
+    --token-secondary-700: 129deg 37% 36%;
+    --token-secondary-800: 132deg 36% 29%;
+    --token-secondary-900: 134deg 35% 24%;
+    --token-secondary-950: 134deg 35% 17%;
+
+    /* Success */
+    --token-success-50: 148deg 68% 96%;
+    --token-success-100: 145deg 73% 91%;
+    --token-success-200: 148deg 68% 83%;
+    --token-success-300: 151deg 62% 72%;
+    --token-success-400: 151deg 53% 61%;
+    --token-success-500: 151deg 41% 48%;
+    --token-success-600: 152deg 39% 41%;
+    --token-success-700: 154deg 40% 33%;
+    --token-success-800: 157deg 41% 26%;
+    --token-success-900: 157deg 41% 21%;
+    --token-success-950: 157deg 41% 16%;
+
+    /* Warning */
+    --token-warning-50: 54deg 91% 96%;
+    --token-warning-100: 55deg 93% 89%;
+    --token-warning-200: 53deg 94% 79%;
+    --token-warning-300: 50deg 93% 68%;
+    --token-warning-400: 47deg 88% 62%;
+    --token-warning-500: 43deg 74% 57%;
+    --token-warning-600: 38deg 60% 47%;
+    --token-warning-700: 33deg 63% 37%;
+    --token-warning-800: 30deg 61% 31%;
+    --token-warning-900: 28deg 59% 26%;
+    --token-warning-950: 28deg 59% 16%;
+
+    /* Error */
+    --token-error-50: 355deg 75% 97%;
+    --token-error-100: 357deg 73% 94%;
+    --token-error-200: 354deg 71% 89%;
+    --token-error-300: 353deg 72% 80%;
+    --token-error-400: 353deg 74% 70%;
+    --token-error-500: 352deg 73% 60%;
+    --token-error-600: 351deg 62% 51%;
+    --token-error-700: 351deg 61% 43%;
+    --token-error-800: 348deg 61% 36%;
+    --token-error-900: 345deg 60% 31%;
+    --token-error-950: 345deg 60% 18%;
+  }
+}

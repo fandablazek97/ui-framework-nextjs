@@ -26,11 +26,7 @@ const componentVariants = {
     secondary: "bg-secondary",
     neutral: "bg-neutral",
     white: "bg-white",
-    black: "bg-gray-900",
-  },
-  disableOpacity: {
-    true: "",
-    false: "opacity-40",
+    black: "bg-black",
   },
 };
 
@@ -39,7 +35,7 @@ export default function Separator({
   orientation = "horizontal",
   color = "inherit",
   disableOpacity = false,
-  isDecorative = false,
+  isDecorative = true,
   className = "",
   ...rest
 }: SeparatorProps) {
@@ -52,7 +48,7 @@ export default function Separator({
       className={clsx(
         componentVariants.orientation[orientation],
         componentVariants.color[color],
-        disableOpacity ? "" : componentVariants.disableOpacity.false,
+        disableOpacity ? "" : "opacity-40",
         className
       )}
       {...rest}

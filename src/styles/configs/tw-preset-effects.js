@@ -119,8 +119,9 @@ module.exports = {
         "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)",
         "in-out-back": "cubic-bezier(0.68, -0.6, 0.32, 1.6)",
       },
-      animation: {
-        spinner: "spin .6s linear infinite",
+      transitionDuration: {
+        250: "250ms",
+        400: "400ms",
       },
     },
   },

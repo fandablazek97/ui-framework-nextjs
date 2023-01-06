@@ -41,7 +41,7 @@ export default function Document() {
       <Head>
         <script dangerouslySetInnerHTML={{ __html: modeScript }} />
       </Head>
-      <body className="overflow-x-hidden bg-body font-sans font-normal text-content antialiased selection:bg-primary/80 selection:text-white">
+      <body className="bg-surface overflow-x-hidden font-sans font-normal text-body antialiased selection:bg-primary/80 selection:text-white">
         <Main />
         <NextScript />
       </body>

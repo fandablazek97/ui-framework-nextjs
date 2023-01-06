@@ -1,99 +1,108 @@
 @layer base {
-  html,
-  body {
-    scrollbar-gutter: stable;
-  }
   :root,
   .light {
-    --color-white: 0, 0%, 100%;
-    --color-gray-50: 204, 45%, 98%;
-    --color-gray-100: 210, 31%, 95%;
-    --color-gray-200: 215, 27%, 91%;
-    --color-gray-300: 213, 22%, 84%;
-    --color-gray-400: 214, 18%, 69%;
-    --color-gray-500: 217, 13%, 52%;
-    --color-gray-600: 219, 15%, 35%;
-    --color-gray-700: 220, 20%, 23%;
-    --color-gray-800: 221, 23%, 14%;
-    --color-gray-900: 229, 19%, 11%;
-    --color-black: 0, 0%, 0%;
+    /* Surface (background) */
+    --ui-color-surface: var(--token-white);
+    --ui-color-surface-50: var(--token-gray-50);
+    --ui-color-surface-100: var(--token-gray-100);
+    --ui-color-surface-200: var(--token-gray-200);
+    --ui-color-surface-300: var(--token-gray-300);
 
-    --color-content-base: var(--color-gray-600);
-    --color-content-weak: var(--color-gray-400);
-    --color-content-strong: var(--color-gray-800);
-    --color-content-inverted: var(--color-gray-200);
+    /* Body (foreground) */
+    --ui-color-body: var(--token-gray-600);
+    --ui-color-body-muted: var(--token-gray-400);
+    --ui-color-body-rich: var(--token-gray-900);
+    --ui-color-body-invert: var(--token-white);
 
-    --color-body: var(--color-gray-50);
-    --color-body-50: var(--color-gray-100);
-    --color-body-100: var(--color-gray-200);
-    --color-body-200: var(--color-gray-300);
+    /* Brand colors */
+    --ui-color-primary: var(--token-primary-600);
+    --ui-color-primary-hover: var(--token-primary-500);
+    --ui-color-primary-content: var(--token-primary-50);
+    --ui-color-primary-subtle: var(--token-primary-300);
+    --ui-color-primary-subtle-content: var(--token-primary-800);
 
-    --color-primary-base: 339, 91%, 51%;
-    --color-primary-effect: 339, 91%, 62%;
-    --color-primary-content: 340, 95%, 97%;
+    --ui-color-secondary: var(--token-secondary-600);
+    --ui-color-secondary-hover: var(--token-secondary-500);
+    --ui-color-secondary-content: var(--token-secondary-50);
+    --ui-color-secondary-subtle: var(--token-secondary-300);
+    --ui-color-secondary-subtle-content: var(--token-secondary-800);
 
-    --color-secondary-base: 250, 75%, 59%;
-    --color-secondary-effect: 250, 84%, 67%;
-    --color-secondary-content: 250, 90%, 97%;
+    /* Status colors */
+    --ui-color-success: var(--token-success-600);
+    --ui-color-success-hover: var(--token-success-500);
+    --ui-color-success-content: var(--token-success-50);
+    --ui-color-success-subtle: var(--token-success-300);
+    --ui-color-success-subtle-content: var(--token-success-800);
 
-    --color-neutral-base: var(--color-gray-700);
-    --color-neutral-effect: var(--color-gray-600);
-    --color-neutral-content: var(--color-gray-50);
+    --ui-color-warning: var(--token-warning-600);
+    --ui-color-warning-hover: var(--token-warning-500);
+    --ui-color-warning-content: var(--token-warning-50);
+    --ui-color-warning-subtle: var(--token-warning-300);
+    --ui-color-warning-subtle-content: var(--token-warning-800);
 
-    --color-success-base: 155, 76%, 33%;
-    --color-success-effect: 155, 71%, 42%;
-    --color-success-content: 155, 72%, 97%;
+    --ui-color-error: var(--token-error-600);
+    --ui-color-error-hover: var(--token-error-500);
+    --ui-color-error-content: var(--token-error-50);
+    --ui-color-error-subtle: var(--token-error-300);
+    --ui-color-error-subtle-content: var(--token-error-800);
 
-    --color-error-base: 347, 77%, 50%;
-    --color-error-effect: 350, 89%, 60%;
-    --color-error-content: 345, 85%, 97%;
-
-    --color-warning-base: 41, 96%, 40%;
-    --color-warning-effect: 45, 93%, 47%;
-    --color-warning-content: 45, 90%, 97%;
-
-    --color-info-base: 200, 98%, 39%;
-    --color-info-effect: 199, 89%, 48%;
-    --color-info-content: 194, 95%, 97%;
+    --ui-color-neutral: var(--token-gray-900);
+    --ui-color-neutral-hover: var(--token-gray-600);
+    --ui-color-neutral-content: var(--token-gray-50);
+    --ui-color-neutral-subtle: var(--token-gray-400);
+    --ui-color-neutral-subtle-content: var(--token-gray-900);
   }
 
   .dark {
-    --color-content-base: var(--color-gray-200);
-    --color-content-weak: var(--color-gray-400);
-    --color-content-strong: var(--color-white);
-    --color-content-inverted: var(--color-gray-800);
+    /* Surface (background) */
+    --ui-color-surface: var(--token-gray-950);
+    --ui-color-surface-50: var(--token-gray-900);
+    --ui-color-surface-100: var(--token-gray-800);
+    --ui-color-surface-200: var(--token-gray-700);
+    --ui-color-surface-300: var(--token-gray-600);
 
-    --color-body: var(--color-gray-900);
-    --color-body-50: var(--color-gray-800);
-    --color-body-100: var(--color-gray-700);
-    --color-body-200: var(--color-gray-600);
+    /* Body (foreground) */
+    --ui-color-body: var(--token-gray-300);
+    --ui-color-body-muted: var(--token-gray-600);
+    --ui-color-body-rich: var(--token-gray-50);
+    --ui-color-body-invert: var(--token-gray-900);
 
-    --color-primary-base: 339, 91%, 58%;
-    --color-primary-effect: 339, 91%, 69%;
-    --color-primary-content: 340, 95%, 97%;
+    /* Brand colors */
+    --ui-color-primary: var(--token-primary-600);
+    --ui-color-primary-hover: var(--token-primary-500);
+    --ui-color-primary-content: var(--token-primary-50);
+    --ui-color-primary-subtle: var(--token-primary-900);
+    --ui-color-primary-subtle-content: var(--token-primary-300);
 
-    --color-secondary-base: 250, 89%, 74%;
-    --color-secondary-effect: 250, 84%, 82%;
-    --color-secondary-content: 250, 90%, 10%;
+    --ui-color-secondary: var(--token-secondary-400);
+    --ui-color-secondary-hover: var(--token-secondary-500);
+    --ui-color-secondary-content: var(--token-secondary-950);
+    --ui-color-secondary-subtle: var(--token-secondary-900);
+    --ui-color-secondary-subtle-content: var(--token-secondary-300);
 
-    --color-neutral-base: var(--color-gray-100);
-    --color-neutral-effect: var(--color-gray-300);
-    --color-neutral-content: var(--color-gray-800);
+    /* Status colors */
+    --ui-color-success: var(--token-success-400);
+    --ui-color-success-hover: var(--token-success-500);
+    --ui-color-success-content: var(--token-success-950);
+    --ui-color-success-subtle: var(--token-success-900);
+    --ui-color-success-subtle-content: var(--token-success-200);
 
-    --color-success-base: 155, 69%, 58%;
-    --color-success-effect: 155, 77%, 73%;
-    --color-success-content: 155, 72%, 16%;
+    --ui-color-warning: var(--token-warning-400);
+    --ui-color-warning-hover: var(--token-warning-500);
+    --ui-color-warning-content: var(--token-warning-950);
+    --ui-color-warning-subtle: var(--token-warning-900);
+    --ui-color-warning-subtle-content: var(--token-warning-200);
 
-    --color-error-base: 351, 95%, 68%;
-    --color-error-effect: 353, 96%, 77%;
-    --color-error-content: 345, 85%, 16%;
+    --ui-color-error: var(--token-error-400);
+    --ui-color-error-hover: var(--token-error-500);
+    --ui-color-error-content: var(--token-error-950);
+    --ui-color-error-subtle: var(--token-error-900);
+    --ui-color-error-subtle-content: var(--token-error-200);
 
-    --color-warning-base: 48, 96%, 53%;
-    --color-warning-effect: 50, 98%, 64%;
-    --color-warning-content: 45, 90%, 16%;
-
-    --color-info-base: 198, 93%, 60%;
-    --color-info-effect: 199, 95%, 74%;
-    --color-info-content: 194, 95%, 16%;
+    --ui-color-neutral: var(--token-gray-100);
+    --ui-color-neutral-hover: var(--token-gray-400);
+    --ui-color-neutral-content: var(--token-gray-900);
+    --ui-color-neutral-subtle: var(--token-gray-600);
+    --ui-color-neutral-subtle-content: var(--token-gray-100);
   }
 }

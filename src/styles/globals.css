@@ -1,15 +1,15 @@
 @charset "UTF-8";
 
-/* Tailwind */
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 @import "tailwindcss/variants";
 
-/* Theme variables */
+@import "tokens.css";
 @import "themes.css";
 
 /* @layer base {
+  ...
 } */
 
 /* @layer components {

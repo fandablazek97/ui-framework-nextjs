@@ -1,6 +1,6 @@
+import CloseButton from "@components/CloseButton";
 import clsx from "clsx";
 import { forwardRef, useState } from "react";
-import CloseButton from "./CloseButton";
 
 function SuccessIcon({
   className = "",
@@ -113,10 +113,11 @@ function InfoIcon({
 type AlertProps = {
   children?: React.ReactNode;
   title: string;
-  status?: "success" | "error" | "warning" | "info" | "neutral";
+  status?: "success" | "warning" | "error" | "neutral";
   variant?: "filled" | "subtle";
   radius?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full";
   hasIcon?: boolean;
+  customIcon?: JSX.Element;
   isDismissable?: boolean;
   isVisible?: boolean;
   className?: string;
@@ -128,20 +129,15 @@ const componentVariants = {
   variants: {
     filled: {
       success: "bg-success text-success-content",
-      error: "bg-error text-error-content",
       warning: "bg-warning text-warning-content",
-      info: "bg-info text-info-content",
+      error: "bg-error text-error-content",
       neutral: "bg-neutral text-neutral-content",
     },
     subtle: {
-      success:
-        "bg-success-effect/10 text-success ring-1 ring-inset ring-success/20",
-      error: "bg-error-effect/10 text-error ring-1 ring-inset ring-error/20",
-      warning:
-        "bg-warning-effect/10 text-warning ring-1 ring-inset ring-warning/20",
-      info: "bg-info-effect/10 text-info ring-1 ring-inset ring-info/20",
-      neutral:
-        "bg-neutral-effect/10 text-neutral ring-1 ring-inset ring-neutral/20",
+      success: "bg-success-subtle/40 text-success-subtle-content",
+      warning: "bg-warning-subtle/40 text-warning-subtle-content",
+      error: "bg-error-subtle/40 text-error-subtle-content",
+      neutral: "bg-neutral-subtle/40 text-neutral-subtle-content",
     },
   },
   radius: {
@@ -155,16 +151,24 @@ const componentVariants = {
   },
 };
 
+const Icons = {
+  success: SuccessIcon,
+  error: ErrorIcon,
+  warning: WarningIcon,
+  neutral: InfoIcon,
+};
+
 const Alert = forwardRef<Ref, AlertProps>(
   (
     {
       // Component props
       children,
-      title = "This is alert message",
-      status = "info",
-      variant = "filled",
+      title,
+      status = "success",
+      variant = "subtle",
+      radius = "xl",
       hasIcon = true,
-      radius = "2xl",
+      customIcon,
       isDismissable = true,
       isVisible = true,
       className = "",
@@ -172,13 +176,22 @@ const Alert = forwardRef<Ref, AlertProps>(
     },
     ref
   ) => {
-    // Component logic
+    // Resolve icon based on status prop
+    const IconComponent = Icons[status];
+
+    // State
     const [isShown, setIsShown] = useState(isVisible);
 
     function hideAlert() {
       setIsShown(false);
     }
-    return isShown ? (
+
+    // Destroy component if close button is clicked
+    if (!isShown) {
+      return null;
+    }
+
+    return (
       <div
         ref={ref}
         className={clsx(
@@ -189,45 +202,28 @@ const Alert = forwardRef<Ref, AlertProps>(
         )}
         {...rest}
       >
-        <div className="mr-auto flex flex-col items-start justify-start gap-3 sm:flex-row">
-          {hasIcon && status === "info" && (
+        <div className="mr-auto flex flex-col items-start justify-start gap-2 xs:gap-3 sm:flex-row lg:gap-5">
+          {hasIcon && !customIcon ? (
             <div className="hidden xs:block sm:pt-1">
-              <InfoIcon aria-hidden="true" className="h-6 w-6" />
+              <IconComponent aria-hidden="true" className="h-6 w-6" />
             </div>
-          )}
-          {hasIcon && status === "success" && (
-            <div className="hidden xs:block sm:pt-1">
-              <SuccessIcon aria-hidden="true" className="h-6 w-6" />
-            </div>
-          )}
-          {hasIcon && status === "warning" && (
-            <div className="hidden xs:block sm:pt-1">
-              <WarningIcon aria-hidden="true" className="h-6 w-6" />
-            </div>
-          )}
-          {hasIcon && status === "error" && (
-            <div className="hidden xs:block sm:pt-1">
-              <ErrorIcon aria-hidden="true" className="h-6 w-6" />
-            </div>
-          )}
-          {hasIcon && status === "neutral" && (
-            <div className="hidden xs:block sm:pt-1">
-              <InfoIcon aria-hidden="true" className="h-6 w-6" />
+          ) : (
+            <div className="hidden h-6 w-6 xs:block sm:pt-1" aria-hidden="true">
+              {customIcon}
             </div>
           )}
           <div>
-            <div className="text-lg font-semibold">{title}</div>
+            {title && <div className="text-lg font-semibold">{title}</div>}
             <div>{children}</div>
           </div>
         </div>
         {isDismissable && <CloseButton size="sm" onClick={hideAlert} />}
       </div>
-    ) : null;
+    );
   }
 );
 
 export type Ref = HTMLDivElement;
-
 Alert.displayName = "Alert";
 
 export default Alert;

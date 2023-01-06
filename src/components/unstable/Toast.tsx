@@ -3,7 +3,10 @@ import * as ToastPrimitive from "@radix-ui/react-toast";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 import { useId } from "react";
-import CloseButton from "./CloseButton";
+import CloseButton from "../CloseButton";
+
+// ToDo
+// - update logic to be more reusable
 
 type NotificationProps = {
   open: boolean;

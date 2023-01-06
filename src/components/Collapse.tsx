@@ -42,7 +42,7 @@ export function CollapseGroup({
 }: CollapseGroupProps) {
   return (
     <div className={className} {...props}>
-      <div className="flex flex-col divide-y-1 divide-content-strong/15">
+      <div className="divide-body-rich/15 flex flex-col divide-y-1">
         {children}
       </div>
     </div>
@@ -89,7 +89,7 @@ export function Collapse({
           id={"collapse-trigger-" + triggerId}
           aria-controls={"collapse-panel-" + panelID}
           aria-expanded={isOpen ? "true" : "false"}
-          className="flex w-full items-center justify-between py-4 text-content-strong"
+          className="text-body-rich flex w-full items-center justify-between py-4"
         >
           <span className="block w-full text-left text-base font-semibold sm:text-lg">
             {title}

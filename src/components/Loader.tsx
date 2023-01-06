@@ -1,18 +1,20 @@
 import clsx from "clsx";
 
+// Future ToDo
+// - implement custom label prop
+
 type LoaderProps = {
   className?: string;
   size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "inherit";
   thickness?: "1" | "2" | "3" | "4" | "5" | "inherit";
   color?:
+    | "inherit"
     | "primary"
     | "secondary"
-    | "neutral"
     | "success"
-    | "error"
     | "warning"
-    | "info"
-    | "inherit";
+    | "error"
+    | "neutral";
 };
 
 // Component Variant Styles
@@ -35,14 +37,13 @@ const componentVariants = {
     inherit: "border-[0.125em]",
   },
   color: {
+    inherit: "border-current",
     primary: "border-primary",
     secondary: "border-secondary",
-    neutral: "border-neutral",
     success: "border-success",
-    error: "border-error",
     warning: "border-warning",
-    info: "border-info",
-    inherit: "border-current",
+    error: "border-error",
+    neutral: "border-neutral",
   },
 };
 

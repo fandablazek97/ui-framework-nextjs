@@ -1,8 +1,8 @@
 import Favicon from "@components/Favicon";
-import Navbar from "@components/Navbar";
-import CookieConsent from "./CookieConsent";
+import Navbar from "@components/unstable/Navbar";
 import Head from "./Head";
 import ScrollToTop from "./ScrollToTop";
+// import CookieConsent from "./unstable/CookieConsent";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -11,9 +11,9 @@ type LayoutProps = {
 export default function Layout({ children }: LayoutProps) {
   return (
     <>
+      {/* <CookieConsent /> */}
       <Head />
       <Favicon />
-      <CookieConsent />
       <header>
         <Navbar />
       </header>

@@ -2,6 +2,9 @@ import clsx from "clsx";
 import NextLink from "next/link";
 import { forwardRef } from "react";
 
+// ToDo:
+// - Need to be properly tested
+
 type LinkProps = {
   href: string;
   isExternal?: boolean | undefined;

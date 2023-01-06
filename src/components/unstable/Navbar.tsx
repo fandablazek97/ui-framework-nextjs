@@ -1,6 +1,6 @@
-import { Logo } from "@components/Logo";
 import ModeSwitch from "@components/ModeSwitch";
-import Wrapper from "@components/Wrapper";
+import { Logo } from "@components/unstable/Logo";
+import Wrapper from "@components/unstable/Wrapper";
 import { routes } from "@configs/routes";
 // import { useScrollPosition } from "@hooks/useScrollPosition";
 import clsx from "clsx";
@@ -8,6 +8,9 @@ import { AnimatePresence, motion, useScroll } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+
+// ToDo
+// - Rewrite styling to be more pretty and easier to customize
 
 function DesktopNavLink({ href, label }: { href: string; label: string }) {
   const router = useRouter();
@@ -19,7 +22,7 @@ function DesktopNavLink({ href, label }: { href: string; label: string }) {
         "text-sm",
         matches
           ? "pointer-events-none cursor-default text-primary"
-          : "text-content-base"
+          : "text-body"
       )}
     >
       {label}
@@ -44,7 +47,7 @@ function TouchNavLink({
         "font-sans text-lg font-bold sm:text-2xl",
         matches
           ? "pointer-events-none cursor-default text-primary"
-          : "text-content-strong"
+          : "text-body-rich"
       )}
     >
       <Link href={href} passHref legacyBehavior>
@@ -79,25 +82,25 @@ function BurgerButton({
     <button
       aria-label="Otevřít / zavřít menu"
       className={clsx(
-        "z-offcanvas-above group relative flex h-12 w-12 flex-col items-center justify-center gap-1.5 rounded-full"
+        "group relative z-offcanvas-above flex h-12 w-12 flex-col items-center justify-center gap-1.5 rounded-full"
       )}
       onClick={onClick}
     >
       <span
         className={clsx(
-          "h-0.5 w-6 origin-center transform-gpu rounded-full bg-content-strong transition duration-300 ease-out-back group-hover:bg-body",
+          "bg-body-rich group-hover:bg-surface h-0.5 w-6 origin-center transform-gpu rounded-full transition duration-300 ease-out-back",
           isOpen && "translate-y-[4px] -rotate-45"
         )}
       />
       <span
         className={clsx(
-          "h-0.5 w-6 origin-center transform-gpu rounded-full bg-content-strong transition duration-300 ease-out-back group-hover:bg-body",
+          "bg-body-rich group-hover:bg-surface h-0.5 w-6 origin-center transform-gpu rounded-full transition duration-300 ease-out-back",
           isOpen && "-translate-y-[4px] rotate-45"
         )}
       />
       <span
         className={clsx(
-          "absolute inset-0 -z-10 h-full w-full scale-75 rounded-full bg-content-strong opacity-0 transition duration-300 ease-out-back group-hover:scale-110 group-hover:opacity-100"
+          "bg-body-rich absolute inset-0 -z-10 h-full w-full scale-75 rounded-full opacity-0 transition duration-300 ease-out-back group-hover:scale-110 group-hover:opacity-100"
         )}
       ></span>
     </button>
@@ -108,14 +111,11 @@ function TouchMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
-  function closeMenu() {
-    setIsOpen(false);
-  }
-
   function toggleMenu() {
     setIsOpen(!isOpen);
   }
 
+  // Prevents scrolling when menu is open
   useEffect(() => {
     if (isOpen === true) {
       document.body.classList.add(
@@ -134,6 +134,8 @@ function TouchMenu() {
     }
   }, [isOpen, setIsOpen]);
 
+  // Prevents closing the menu when Link is clicked,
+  // but new page is not fully loaded yet
   useEffect(() => {
     if (!isOpen) return;
 
@@ -148,7 +150,7 @@ function TouchMenu() {
       router.events.off("routeChangeComplete", onRouteChange);
       router.events.off("routeChangeError", onRouteChange);
     };
-  }, [router, isOpen]);
+  }, [router, isOpen, setIsOpen]);
 
   return (
     <>
@@ -156,8 +158,8 @@ function TouchMenu() {
       <AnimatePresence initial={false}>
         {isOpen && (
           <>
-            {/* Overlay */}
-            <motion.div
+            {/* Overlay - if needed for changes */}
+            {/* <motion.div
               initial={{ opacity: 0 }}
               animate={{
                 opacity: 1,
@@ -170,23 +172,35 @@ function TouchMenu() {
               onClick={closeMenu}
               onTap={closeMenu}
               className="z-offcanvas-below fixed inset-0 bg-gray-900/40 backdrop-blur-md"
-            />
+            /> */}
 
             {/* Panel with content */}
             <motion.div
-              initial={{ opacity: 0, y: -64 }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                transition: { duration: 0.4, ease: "easeOut" },
-              }}
-              exit={{
-                opacity: 0,
-                y: -64,
-                transition: { duration: 0.2 },
-              }}
-              className="z-offcanvas absolute inset-x-0 top-0 origin-top rounded-b-2xl bg-body-50 shadow-2xl dark:shadow-none"
+              // initial={{ opacity: 0, y: -64 }}
+              // animate={{
+              //   opacity: 1,
+              //   y: 0,
+              //   transition: { duration: 0.4, ease: "easeOut" },
+              // }}
+              // exit={{
+              //   opacity: 0,
+              //   y: -64,
+              //   transition: { duration: 0.2 },
+              // }}
+              className="fixed inset-0 z-offcanvas"
             >
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{
+                  scale: 1,
+                  transition: { duration: 0.8, ease: "easeOut" },
+                }}
+                exit={{
+                  scale: 0,
+                  transition: { duration: 0.6 },
+                }}
+                className="bg-surface-100 fixed top-[calc(40px-250vw)] right-[calc(60px-250vw)] h-[500vw] w-[500vw] origin-center rounded-full md:top-[calc(40px-190vw)] md:right-[calc(60px-190vw)] md:h-[380vw] md:w-[380vw] lg:top-[calc(48px-125vw)] lg:right-[calc(60px-125vw)] lg:h-[250vw] lg:w-[250vw]"
+              ></motion.div>
               {/* Menu */}
               <Wrapper size="lg" className="pt-24 pb-8 sm:pb-12">
                 <ul className="flex flex-col gap-y-2">
@@ -233,9 +247,9 @@ export default function Navbar() {
     <header>
       <nav
         className={clsx(
-          "z-fixed fixed inset-x-0 top-0 w-screen transition duration-500 ease-out",
+          "fixed inset-x-0 top-0 z-fixed w-screen transition duration-500 ease-out",
           isScrolled &&
-            "bg-body/80 shadow-xl backdrop-blur-md dark:shadow-none",
+            "bg-surface/80 shadow-xl backdrop-blur-md dark:shadow-none",
           !isVisible && "-translate-y-full shadow-none"
         )}
       >
@@ -244,7 +258,7 @@ export default function Navbar() {
           className="flex items-center justify-between gap-4 py-5 sm:py-6"
         >
           {/* Logo */}
-          <div className="z-offcanvas-above relative mr-auto">
+          <div className="relative z-offcanvas-above mr-auto">
             <Logo variant="light-background" className="dark:hidden" />
             <Logo variant="dark-background" className="hidden dark:block" />
           </div>

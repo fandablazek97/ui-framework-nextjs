@@ -4,6 +4,9 @@ import clsx from "clsx";
 import { motion } from "framer-motion";
 import { Fragment } from "react";
 
+// ToDo:
+// - Add all props to tabs components
+
 export function Tab({
   children,
   className = "",
@@ -24,15 +27,13 @@ export function Tab({
             <motion.div
               layoutId="tabBackground"
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="absolute inset-0 h-full w-full rounded-[36px] border border-body-100 bg-body dark:border-none dark:bg-gray-100"
+              className="border-surface-100 absolute inset-0 h-full w-full rounded-[36px] border bg-body dark:border-none dark:bg-gray-100"
             ></motion.div>
           )}
           <span
             className={clsx(
               "z-10 font-semibold transition-colors duration-300 ease-out",
-              selected
-                ? "text-content-strong dark:text-gray-800"
-                : "text-content"
+              selected ? "text-body-rich dark:text-gray-800" : "text-body"
             )}
           >
             {children}
@@ -45,7 +46,7 @@ export function Tab({
 
 export function TabList({ children }: { children: React.ReactNode }) {
   return (
-    <TabPrimitive.List className="flex space-x-2 rounded-full bg-body-50 p-1.5">
+    <TabPrimitive.List className="bg-surface-50 flex space-x-2 rounded-full p-1.5">
       {children}
     </TabPrimitive.List>
   );

@@ -1,85 +1,151 @@
+import Loader from "@components/Loader";
 import clsx from "clsx";
-import { forwardRef } from "react";
-import Loader from "./Loader";
+import { forwardRef, useState } from "react";
 
 type ButtonProps = {
-  children: string;
+  children: React.ReactNode;
   as?: React.ElementType;
-  variant?: "filled" | "outlined" | "subtle" | "plain";
-  color?:
-    | "primary"
-    | "secondary"
-    | "neutral"
-    | "success"
-    | "info"
-    | "warning"
-    | "error";
-  radius?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full";
+
+  variant?: "filled" | "subtle" | "outlined" | "plain";
+  hoverEffect?:
+    | "fade"
+    | "appear"
+    | "expand"
+    | "slide-right"
+    | "slide-left"
+    | "slide-top"
+    | "slide-bottom";
+  color?: "primary" | "secondary" | "success" | "warning" | "error" | "neutral";
   size?: "xs" | "sm" | "md" | "lg" | "xl";
+  radius?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full";
   leftIcon?: JSX.Element;
   rightIcon?: JSX.Element;
-  isFullWidth?: boolean;
-  hasShadow?: boolean;
+
+  isFUllWidth?: boolean;
   isLoading?: boolean;
   isDisabled?: boolean;
   isFocusable?: boolean;
+
   className?: string;
   onClick?: () => void;
   [x: string]: any;
 };
 
-// 02 - Component Variant Styles
+// Component Variant Styles
 const componentVariants = {
-  base: "inline-flex items-center group/button justify-center relative isolate overflow-hidden font-medium tracking-wide no-underline transition duration-200 cursor-pointer",
-  variantsBase: {
-    filled: "",
-    outlined: "bg-opacity-0 hover:bg-opacity-100 ring-inset ring-1",
-    subtle: "bg-opacity-10 hover:bg-opacity-20",
-    plain: "bg-opacity-0 hover:bg-opacity-20",
-  },
-  variantColors: {
-    filled: {
-      primary: "bg-primary hover:bg-primary-effect text-primary-content",
-      secondary:
-        "bg-secondary hover:bg-secondary-effect text-secondary-content",
-      neutral:
-        "bg-neutral hover:bg-neutral-effect dark:hover:bg-neutral-effect text-neutral-content",
-      success: "bg-success hover:bg-success-effect text-success-content",
-      error: "bg-error hover:bg-error-effect text-error-content",
-      warning: "bg-warning hover:bg-warning-effect text-warning-content",
-      info: "bg-info hover:bg-info-effect text-info-content",
+  root: "relative isolate group/button inline-flex items-center justify-center font-medium no-underline cursor-pointer overflow-hidden",
+  transition: "transition duration-400 ease-out",
+  layer: {
+    // Base layer applied to the root of the button
+    base: {
+      filled: {
+        primary: "text-primary-content",
+        secondary: "text-secondary-content",
+        success: "text-success-content",
+        warning: "text-warning-content",
+        error: "text-error-content",
+        neutral: "text-neutral-content",
+      },
+      subtle: {
+        primary: "text-primary-subtle-content",
+        secondary: "text-secondary-subtle-content",
+        success: "text-success-subtle-content",
+        warning: "text-warning-subtle-content",
+        error: "text-error-subtle-content",
+        neutral: "text-neutral-subtle-content",
+      },
+      outlined: {
+        primary:
+          "text-primary ring-1 ring-inset ring-primary hover:text-primary-content",
+        secondary:
+          "text-secondary ring-1 ring-inset ring-secondary hover:text-secondary-content",
+        success:
+          "text-success ring-1 ring-inset ring-success hover:text-success-content",
+        warning:
+          "text-warning ring-1 ring-inset ring-warning hover:text-warning-content",
+        error:
+          "text-error ring-1 ring-inset ring-error hover:text-error-content",
+        neutral:
+          "text-neutral ring-1 ring-inset ring-neutral hover:text-neutral-content",
+      },
+      plain: {
+        primary: "text-primary-subtle-content",
+        secondary: "text-secondary-subtle-content",
+        success: "text-success-subtle-content",
+        warning: "text-warning-subtle-content",
+        error: "text-error-subtle-content",
+        neutral: "text-neutral-subtle-content",
+      },
     },
-    outlined: {
-      primary:
-        "bg-primary text-primary ring-primary hover:text-primary-content",
-      secondary:
-        "bg-secondary text-secondary ring-secondary hover:text-secondary-content",
-      neutral:
-        "bg-neutral text-neutral ring-neutral hover:text-neutral-content",
-      success:
-        "bg-success text-success ring-success hover:text-success-content",
-      error: "bg-error text-error ring-error hover:text-error-content",
-      warning:
-        "bg-warning text-warning ring-warning hover:text-warning-content",
-      info: "bg-info text-info ring-info hover:text-info-content",
+    // Background layer visible in a initial state
+    background: {
+      filled: {
+        primary: "bg-primary",
+        secondary: "bg-secondary",
+        success: "bg-success",
+        warning: "bg-warning",
+        error: "bg-error",
+        neutral: "bg-neutral",
+      },
+      subtle: {
+        primary: "bg-primary-subtle/30",
+        secondary: "bg-secondary-subtle/30",
+        success: "bg-success-subtle/30",
+        warning: "bg-warning-subtle/30",
+        error: "bg-error-subtle/30",
+        neutral: "bg-neutral-subtle/30",
+      },
+      outlined: {
+        primary: "bg-transparent",
+        secondary: "bg-transparent",
+        success: "bg-transparent",
+        warning: "bg-transparent",
+        error: "bg-transparent",
+        neutral: "bg-transparent",
+      },
+      plain: {
+        primary: "bg-transparent",
+        secondary: "bg-transparent",
+        success: "bg-transparent",
+        warning: "bg-transparent",
+        error: "bg-transparent",
+        neutral: "bg-transparent",
+      },
     },
-    subtle: {
-      primary: "bg-primary-effect text-primary",
-      secondary: "bg-secondary-effect text-secondary",
-      neutral: "bg-neutral-effect text-neutral",
-      success: "bg-success-effect text-success",
-      error: "bg-error-effect text-error",
-      warning: "bg-warning-effect text-warning",
-      info: "bg-info-effect text-info",
-    },
-    plain: {
-      primary: "bg-primary-effect text-primary",
-      secondary: "bg-secondary-effect text-secondary",
-      neutral: "bg-neutral-effect text-neutral",
-      success: "bg-success-effect text-success",
-      error: "bg-error-effect text-error",
-      warning: "bg-warning-effect text-warning",
-      info: "bg-info-effect text-info",
+    // background overlay layer visible on hover and making the hover effect
+    overlayOnHover: {
+      filled: {
+        primary: "bg-primary-hover",
+        secondary: "bg-secondary-hover",
+        success: "bg-success-hover",
+        warning: "bg-warning-hover",
+        error: "bg-error-hover",
+        neutral: "bg-neutral-hover",
+      },
+      subtle: {
+        primary: "bg-primary-subtle/70",
+        secondary: "bg-secondary-subtle/70",
+        success: "bg-success-subtle/70",
+        warning: "bg-warning-subtle/70",
+        error: "bg-error-subtle/70",
+        neutral: "bg-neutral-subtle/70",
+      },
+      outlined: {
+        primary: "bg-primary",
+        secondary: "bg-secondary",
+        success: "bg-success",
+        warning: "bg-warning",
+        error: "bg-error",
+        neutral: "bg-neutral",
+      },
+      plain: {
+        primary: "bg-primary-subtle/50",
+        secondary: "bg-secondary-subtle/50",
+        success: "bg-success-subtle/50",
+        warning: "bg-warning-subtle/50",
+        error: "bg-error-subtle/50",
+        neutral: "bg-neutral-subtle/50",
+      },
     },
   },
   radius: {
@@ -98,27 +164,25 @@ const componentVariants = {
     lg: "px-4 py-2.5 text-sm leading-5 sm:px-4 sm:py-3 sm:text-base sm:leading-6",
     xl: "px-4 py-3 text-base leading-6 sm:px-6 sm:py-4 sm:text-base sm:leading-7",
   },
-  isFullWidth: {
-    true: "w-full",
-    false: "",
+  // Applied to the hover overlay layer and making the hover effect it self
+  hoverEffect: {
+    fade: "opacity-0 group-hover/button:opacity-100",
+    appear:
+      "opacity-0 scale-[0.8] group-hover/button:opacity-100 group-hover/button:scale-100",
+    expand:
+      "origin-center opacity-0 scale-x-0 -skew-x-12 group-hover/button:opacity-100 group-hover/button:scale-x-[120%] transform-gpu",
+    "slide-right":
+      "w-[120%] origin-center opacity-0 -skew-x-12 -translate-x-full group-hover/button:opacity-100 group-hover/button:translate-x-[-10%] transform-gpu",
+    "slide-left":
+      "w-[120%] origin-center opacity-0 -skew-x-12 translate-x-full group-hover/button:opacity-100 group-hover/button:translate-x-[-10% transform-gpu]",
+    "slide-top":
+      "h-[140%] w-[120%] origin-center opacity-0 skew-y-6 translate-y-full group-hover/button:opacity-100 group-hover/button:translate-y-[-20%] transform-gpu",
+    "slide-bottom":
+      "h-[140%] w-[120%] origin-center opacity-0 skew-y-6 -translate-y-full group-hover/button:opacity-100 group-hover/button:translate-y-[-20%] transform-gpu",
   },
-  hasShadow: {
-    primary: "shadow-md shadow-primary/40",
-    secondary: "shadow-md shadow-secondary/40",
-    neutral: "shadow-md shadow-neutral/40",
-    success: "shadow-md shadow-success/40",
-    error: "shadow-md shadow-error/40",
-    warning: "shadow-md shadow-warning/40",
-    info: "shadow-md shadow-info/40",
-  },
-  isDisabled: {
-    true: "pointer-events-none opacity-50",
-    false: "",
-  },
-  isLoading: {
-    true: "pointer-events-none opacity-50",
-    false: "",
-  },
+  fullWidth: "w-full",
+  isLoading: "pointer-events-none opacity-50",
+  isDisabled: "pointer-events-none opacity-50",
 };
 
 const Button = forwardRef<Ref, ButtonProps>(
@@ -127,75 +191,100 @@ const Button = forwardRef<Ref, ButtonProps>(
       // Component props
       as: Tag = "button",
       variant = "filled",
-      color = "primary",
+      hoverEffect = "expand",
+      color = "success",
       radius = "lg",
       size = "md",
-      leftIcon = null,
-      rightIcon = null,
+      leftIcon,
+      rightIcon,
       isFullWidth = false,
-      hasShadow = false,
       isLoading = false,
       isDisabled = false,
       isFocusable = true,
       className = "",
-      onClick,
       children,
+      onClick,
       ...rest
     },
     ref
   ) => {
-    // Component logic
-    // Affects `will change` property
-    // const [hover, setHover] = useState(false);
+    // State detecting if the button is hovered
+    // for appling "will-change" for performance
+    const [isHovered, setIsHovered] = useState(false);
+
     return (
       <Tag
         ref={ref}
-        className={clsx(
-          className,
-          componentVariants.base,
-          componentVariants.variantsBase[variant],
-          componentVariants.variantColors[variant][color],
-          componentVariants.radius[radius],
-          componentVariants.sizes[size],
-          isFullWidth && componentVariants.isFullWidth.true,
-          hasShadow && componentVariants.hasShadow[color],
-          isDisabled && componentVariants.isDisabled.true,
-          isLoading && componentVariants.isLoading.true
-        )}
         onClick={onClick}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         disabled={isDisabled || isLoading}
         aria-hidden={isDisabled || isLoading}
         tabIndex={isDisabled || isLoading || !isFocusable ? -1 : 0}
+        className={clsx(
+          componentVariants.root,
+          componentVariants.transition,
+          componentVariants.layer.base[variant][color],
+          componentVariants.sizes[size],
+          componentVariants.radius[radius],
+          isFullWidth && componentVariants.fullWidth,
+          isLoading && componentVariants.isLoading,
+          isDisabled && componentVariants.isDisabled,
+          isHovered && "will-change-transform",
+          className
+        )}
         {...rest}
       >
-        {leftIcon !== null && (
+        {/* ** Layer background ** */}
+        {(variant === "filled" || variant === "subtle") && (
+          <span
+            className={clsx(
+              "absolute inset-0 -z-20",
+              componentVariants.radius[radius],
+              componentVariants.layer.background[variant][color]
+            )}
+          />
+        )}
+
+        {/* ** Layer hover ** */}
+        <span
+          className={clsx(
+            "absolute inset-0 -z-10",
+            componentVariants.transition,
+            componentVariants.radius[radius],
+            componentVariants.layer.overlayOnHover[variant][color],
+            componentVariants.hoverEffect[hoverEffect],
+            isHovered && "will-change-transform"
+          )}
+        />
+
+        {/* ** Layer content ** */}
+        {/* Left icon */}
+        {leftIcon && (
           <span
             aria-hidden="true"
-            className={clsx(
-              "z-[1] mr-2 scale-[1.15]",
-              isLoading && "invisible"
-            )}
+            className={clsx("z-10 mr-2 scale-[1.15]", isLoading && "invisible")}
           >
             {leftIcon}
           </span>
         )}
 
-        <span className={clsx(isLoading && "invisible", "z-[1]")}>
+        {/* Text */}
+        <span className={clsx("z-10", isLoading && "invisible")}>
           {children}
         </span>
 
-        {rightIcon !== null && (
+        {/* Right icon */}
+        {rightIcon && (
           <span
             aria-hidden="true"
-            className={clsx(
-              "z-[1] ml-2 scale-[1.15]",
-              isLoading && "invisible"
-            )}
+            className={clsx("z-10 ml-2 scale-[1.15]", isLoading && "invisible")}
           >
             {rightIcon}
           </span>
         )}
 
+        {/* Loading spinner */}
         {isLoading && (
           <Loader
             size="inherit"
@@ -210,7 +299,6 @@ const Button = forwardRef<Ref, ButtonProps>(
 );
 
 export type Ref = HTMLElement;
-
 Button.displayName = "Button";
 
 export default Button;

@@ -1,5 +1,9 @@
 import clsx from "clsx";
 
+// ToDo
+// - rename component to "Container"
+// - Rewrite component to be simpler
+
 type WrapperProps = {
   as?: React.ElementType;
   children: React.ReactNode;
@@ -12,7 +16,7 @@ type WrapperProps = {
 };
 
 const componentVariants = {
-  base: "mx-auto w-[90%] 2xl:w-[94%]",
+  base: "mx-auto w-[calc(100%-60px)]",
   size: {
     sm: "max-w-3xl",
     md: "max-w-7xl",

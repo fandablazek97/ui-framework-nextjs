@@ -1,10 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import Button from "./Button";
-import CloseButton from "./CloseButton";
+import Button from "../Button";
+import CloseButton from "../CloseButton";
 
-// Q: How to scan whole website for all cookies used?
-// A: https://www.cookiebot.com/en/cookie-scanner/
+// ToDo
+// - Write whole logic for this component
+// - Update styling
 
 function CookieIcon({ ...props }: { [x: string]: any }) {
   return (
@@ -66,7 +67,7 @@ export default function CookieConsent({
             initial={{ opacity: 0, y: 32, x: "-50%" }}
             animate={{ opacity: 1, y: 0, x: "-50%" }}
             transition={{ duration: 0.3, ease: "circOut" }}
-            className="z-fixed-above fixed left-1/2 bottom-5 w-[90%] max-w-7xl origin-center rounded-2xl bg-gray-700 px-4 py-6 text-white sm:py-4 lg:rounded-full"
+            className="fixed left-1/2 bottom-5 z-fixed-above w-[90%] max-w-7xl origin-center rounded-2xl bg-gray-700 px-4 py-6 text-white sm:py-4 lg:rounded-full"
           >
             <div className="flex flex-col items-center justify-between gap-5 lg:flex-row">
               <div className="flex items-center justify-center rounded-full bg-white/10 p-2">

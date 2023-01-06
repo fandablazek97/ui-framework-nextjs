@@ -74,7 +74,7 @@ export default function ModeSwitch({ className = "" }: ModeSwitchProps) {
       aria-label="Přepnout tmavý / světlý režim"
       className={clsx(
         className,
-        "inline-flex h-12 w-12 items-center justify-center text-content-weak transition-colors duration-200 hover:text-content-strong"
+        "text-body-muted hover:text-body-rich inline-flex h-12 w-12 items-center justify-center transition-colors duration-200"
       )}
       onClick={toggleMode}
     >
