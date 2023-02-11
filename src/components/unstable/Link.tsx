@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import NextLink from "next/link";
-import { forwardRef } from "react";
+import { forwardRef, useMemo } from "react";
 
 // ToDo:
 // - Need to be properly tested
@@ -83,7 +83,7 @@ const Link = forwardRef<Ref, LinkProps>(
     ref
   ) => {
     // Resolve link type
-    const isExternalComputed = () => {
+    const isExternalComputed = useMemo(() => {
       // isExternal prop is explicitly set
       if (isExternal === true) return true;
       if (isExternal === false) return false;
@@ -106,19 +106,19 @@ const Link = forwardRef<Ref, LinkProps>(
       } else {
         return false;
       }
-    };
+    }, [isExternal, href, target]);
 
     // If target is not set, then set it to "_blank" for external links
-    if (isExternalComputed() && !target && !href.startsWith("#")) {
+    if (isExternalComputed && !target && !href.startsWith("#")) {
       target = "_blank";
     }
 
     // If rel is not set, then set it to "noopener noreferrer" for external links
-    if (isExternalComputed() && !rel && !href.startsWith("#")) {
+    if (isExternalComputed && !rel && !href.startsWith("#")) {
       rel = "noopener noreferrer";
     }
 
-    return !isExternalComputed() ? (
+    return !isExternalComputed ? (
       <NextLink
         ref={ref}
         href={href}

@@ -15,16 +15,16 @@ type NotificationProps = {
   title?: string;
   content: string;
   durationMs?: number;
-
-  variant?: "filled" | "subtle";
   color?:
     | "primary"
     | "secondary"
-    | "neutral"
     | "success"
-    | "error"
     | "warning"
-    | "info";
+    | "error"
+    | "neutral"
+    | "white"
+    | "gray"
+    | "black";
   radius?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full";
 
   className?: string;
@@ -33,32 +33,17 @@ type NotificationProps = {
 
 // Component Variant Styles
 const componentVariants = {
-  root: "p-5 shadow-xl dark:shadow-none",
-  variants: {
-    filled: {
-      primary: "bg-primary text-primary-content",
-      secondary: "bg-secondary text-secondary-content",
-      neutral: "bg-neutral text-neutral-content",
-      success: "bg-success text-success-content",
-      error: "bg-error text-error-content",
-      warning: "bg-warning text-warning-content",
-      info: "bg-info text-info-content",
-    },
-    subtle: {
-      primary:
-        "bg-primary-effect/10 backdrop-blur-lg text-primary ring-1 ring-inset ring-primary/20",
-      secondary:
-        "bg-secondary-effect/10 backdrop-blur-lg text-secondary ring-1 ring-inset ring-secondary/20",
-      neutral:
-        "bg-neutral-effect/10 backdrop-blur-lg text-neutral ring-1 ring-inset ring-neutral/20",
-      success:
-        "bg-success-effect/10 backdrop-blur-lg text-success ring-1 ring-inset ring-success/20",
-      error:
-        "bg-error-effect/10 backdrop-blur-l text-error ring-1 ring-inset ring-error/20",
-      warning:
-        "bg-warning-effect/10 backdrop-blur-lg text-warning ring-1 ring-inset ring-warning/20",
-      info: "bg-info-effect/10 backdrop-blur-lg text-info ring-1 ring-inset ring-info/20",
-    },
+  root: "px-5 py-3 w-full shadow-xl dark:shadow-none",
+  colors: {
+    primary: "bg-primary text-primary-content",
+    secondary: "bg-secondary text-secondary-content",
+    success: "bg-success text-success-content",
+    warning: "bg-warning text-warning-content",
+    error: "bg-error text-error-content",
+    neutral: "bg-neutral text-neutral-content",
+    white: "bg-white text-gray-700",
+    gray: "bg-gray-600 text-white",
+    black: "bg-gray-900 text-white",
   },
   radius: {
     none: "rounded-none",
@@ -78,14 +63,13 @@ export default function Notification({
   title,
   content,
   durationMs = 3000,
-  variant = "filled",
-  color = "primary",
-  radius = "lg",
+  color = "gray",
+  radius = "xl",
   className = "",
   ...rest
 }: NotificationProps) {
   // Component logic
-  const uniqueId = useId();
+  const notificationId = useId();
   return (
     // Component markup
     <AnimatePresence initial={false}>
@@ -100,21 +84,19 @@ export default function Notification({
           {...rest}
         >
           <motion.li
-            key={uniqueId}
-            initial={{ opacity: 0, x: "50%" }}
-            animate={{ opacity: 1, x: 0 }}
+            key={notificationId}
+            initial={{ opacity: 0, y: "-64px" }}
+            animate={{ opacity: 1, y: 0 }}
             exit={{
               opacity: 0,
-              x: "50%",
+              y: "-64px",
               transition: { duration: 0.2, ease: "easeOut" },
             }}
-            drag="x"
-            dragConstraints={{ right: 500, left: 0 }}
             className={clsx(
               className,
               componentVariants.root,
-              componentVariants.radius[radius],
-              componentVariants.variants[variant][color]
+              componentVariants.colors[color],
+              componentVariants.radius[radius]
             )}
           >
             <div className="grid grid-cols-5">

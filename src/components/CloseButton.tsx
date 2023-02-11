@@ -90,7 +90,10 @@ const CloseButton = forwardRef<Ref, CloseButtonProps>(
       >
         <XMarkIcon
           aria-hidden="true"
-          className={clsx(componentVariants.size.icon[size])}
+          className={clsx(
+            componentVariants.size.icon[size],
+            "translate-x-0 transform-gpu"
+          )}
         />
         <span
           className={clsx(

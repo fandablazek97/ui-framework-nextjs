@@ -1,4 +1,6 @@
 import clsx from "clsx";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 function SunIcon({ ...props }: { [x: string]: any }) {
   return (
@@ -40,32 +42,29 @@ function MoonIcon({ ...props }: { [x: string]: any }) {
   );
 }
 
-type ModeSwitchProps = {
+type ThemeSwitchProps = {
   className?: string;
 };
 
-export default function ModeSwitch({ className = "" }: ModeSwitchProps) {
-  function disableTransitionsTemporarily() {
-    document.documentElement.classList.add("[&_*]:!transition-none");
-    window.setTimeout(() => {
-      document.documentElement.classList.remove("[&_*]:!transition-none");
-    }, 0);
+export default function ThemeSwitch({ className = "" }: ThemeSwitchProps) {
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
+
+  // Check if component is mounted on the client so we can safely show the UI
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  function toggleTheme() {
+    if (theme === "light") {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
   }
 
-  function toggleMode() {
-    disableTransitionsTemporarily();
-
-    const darkModeMediaQuery = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    );
-    const isSystemDarkMode = darkModeMediaQuery.matches;
-    const isDarkMode = document.documentElement.classList.toggle("dark");
-
-    if (isDarkMode === isSystemDarkMode) {
-      delete window.localStorage.isDarkMode;
-    } else {
-      window.localStorage.isDarkMode = isDarkMode;
-    }
+  if (!mounted) {
+    return <div className={clsx("h-12 w-12 bg-transparent", className)} />;
   }
 
   return (
@@ -74,12 +73,18 @@ export default function ModeSwitch({ className = "" }: ModeSwitchProps) {
       aria-label="Přepnout tmavý / světlý režim"
       className={clsx(
         className,
-        "text-body-muted hover:text-body-rich inline-flex h-12 w-12 items-center justify-center transition-colors duration-200"
+        "group inline-flex h-12 w-12 items-center justify-center text-body-muted transition-colors duration-300 ease-in-out hover:text-body-rich"
       )}
-      onClick={toggleMode}
+      onClick={toggleTheme}
     >
-      <SunIcon aria-hidden="true" className="h-5 w-5 dark:hidden" />
-      <MoonIcon aria-hidden="true" className="hidden h-5 w-5 dark:block" />
+      <SunIcon
+        aria-hidden="true"
+        className="h-5 w-5 origin-center translate-x-0 transform-gpu transition-transform duration-300 ease-in-out group-hover:rotate-180 dark:hidden"
+      />
+      <MoonIcon
+        aria-hidden="true"
+        className="hidden h-5 w-5 ease-in-out dark:block"
+      />
     </button>
   );
 }

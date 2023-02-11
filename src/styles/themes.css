@@ -47,7 +47,7 @@
     --ui-color-error-subtle-content: var(--token-error-800);
 
     --ui-color-neutral: var(--token-gray-900);
-    --ui-color-neutral-hover: var(--token-gray-600);
+    --ui-color-neutral-hover: var(--token-gray-700);
     --ui-color-neutral-content: var(--token-gray-50);
     --ui-color-neutral-subtle: var(--token-gray-400);
     --ui-color-neutral-subtle-content: var(--token-gray-900);
@@ -85,22 +85,22 @@
     --ui-color-success-hover: var(--token-success-500);
     --ui-color-success-content: var(--token-success-950);
     --ui-color-success-subtle: var(--token-success-900);
-    --ui-color-success-subtle-content: var(--token-success-200);
+    --ui-color-success-subtle-content: var(--token-success-300);
 
     --ui-color-warning: var(--token-warning-400);
     --ui-color-warning-hover: var(--token-warning-500);
     --ui-color-warning-content: var(--token-warning-950);
     --ui-color-warning-subtle: var(--token-warning-900);
-    --ui-color-warning-subtle-content: var(--token-warning-200);
+    --ui-color-warning-subtle-content: var(--token-warning-300);
 
     --ui-color-error: var(--token-error-400);
     --ui-color-error-hover: var(--token-error-500);
     --ui-color-error-content: var(--token-error-950);
     --ui-color-error-subtle: var(--token-error-900);
-    --ui-color-error-subtle-content: var(--token-error-200);
+    --ui-color-error-subtle-content: var(--token-error-300);
 
     --ui-color-neutral: var(--token-gray-100);
-    --ui-color-neutral-hover: var(--token-gray-400);
+    --ui-color-neutral-hover: var(--token-gray-300);
     --ui-color-neutral-content: var(--token-gray-900);
     --ui-color-neutral-subtle: var(--token-gray-600);
     --ui-color-neutral-subtle-content: var(--token-gray-100);

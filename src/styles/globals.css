@@ -1,16 +1,77 @@
-@charset "UTF-8";
-
+@import "tokens.css";
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 @import "tailwindcss/variants";
 
-@import "tokens.css";
-@import "themes.css";
+@layer base {
+  /* Design System Theming */
+  html {
+    --default-radius: 0.375rem;
+    --default-duration: 0.25s;
+    --default-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
 
-/* @layer base {
-  ...
-} */
+    --color-primary: 241deg 68% 58%;
+    --color-primary-hover: 237deg 75% 65%;
+    --color-primary-content: 228deg 88% 97%;
+
+    --color-secondary: 84deg 53% 41%;
+    --color-secondary-hover: 83deg 56% 52%;
+    --color-secondary-content: 75deg 83% 95%;
+
+    --color-surface: var(--color-gray-50);
+    --color-surface-100: var(--color-gray-100);
+    --color-surface-200: var(--color-gray-200);
+
+    --color-body: var(--color-gray-600);
+    --color-body-muted: var(--color-gray-400);
+    --color-body-rich: var(--color-gray-800);
+
+    --color-success: 125deg 60% 30%;
+    --color-success-content: 125deg 60% 97%;
+
+    --color-warning: 35deg 80% 40%;
+    --color-warning-content: 45deg 90% 97%;
+
+    --color-error: 355deg 60% 50%;
+    --color-error-content: 355deg 70% 97%;
+
+    --color-neutral: var(--color-gray-800);
+    --color-neutral-content: var(--color-gray-50);
+
+    @apply scroll-pt-28 overflow-x-hidden scroll-smooth bg-surface text-body selection:bg-primary selection:text-white;
+  }
+
+  .dark {
+    --color-primary: 234deg 80% 74%;
+    --color-primary-hover: 230deg 81% 80%;
+    --color-primary-content: 240deg 44% 33%;
+
+    --color-secondary: 81deg 72% 61%;
+    --color-secondary-hover: 79deg 79% 70%;
+    --color-secondary-content: 85deg 46% 22%;
+
+    --color-surface: var(--color-gray-900);
+    --color-surface-100: var(--color-gray-800);
+    --color-surface-200: var(--color-gray-700);
+
+    --color-body: var(--color-gray-300);
+    --color-body-muted: var(--color-gray-500);
+    --color-body-rich: 0deg 0% 100%;
+
+    --color-success: 135deg 80% 65%;
+    --color-success-content: 125deg 60% 20%;
+
+    --color-warning: 45deg 80% 65%;
+    --color-warning-content: 45deg 90% 20%;
+
+    --color-error: 355deg 80% 68%;
+    --color-error-content: 355deg 80% 24%;
+
+    --color-neutral: var(--color-gray-200);
+    --color-neutral-content: var(--color-gray-900);
+  }
+}
 
 /* @layer components {
   ...

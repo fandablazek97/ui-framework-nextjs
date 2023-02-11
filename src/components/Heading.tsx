@@ -4,7 +4,7 @@ type HeadingProps = {
   level: 1 | 2 | 3 | 4 | 5 | 6 | "none";
   size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "inherit";
   font?: "sans" | "serif" | "display" | "mono";
-  color?: "rich" | "primary" | "secondary" | "inherit";
+  color?: "rich" | "muted" | "primary" | "secondary" | "inherit";
   hasMarginBottom?: boolean;
   children: React.ReactNode;
   className?: string;
@@ -31,6 +31,7 @@ const componentVariants = {
   },
   color: {
     rich: "text-body-rich",
+    muted: "text-body-muted",
     primary: "text-primary",
     secondary: "text-secondary",
     inherit: "",

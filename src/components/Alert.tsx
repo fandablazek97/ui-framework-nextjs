@@ -1,6 +1,6 @@
 import CloseButton from "@components/CloseButton";
 import clsx from "clsx";
-import { forwardRef, useState } from "react";
+import { useState } from "react";
 
 function SuccessIcon({
   className = "",
@@ -112,9 +112,9 @@ function InfoIcon({
 
 type AlertProps = {
   children?: React.ReactNode;
-  title: string;
+  title?: string;
   status?: "success" | "warning" | "error" | "neutral";
-  variant?: "filled" | "subtle";
+  variant?: "filled" | "tinted";
   radius?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full";
   hasIcon?: boolean;
   customIcon?: JSX.Element;
@@ -133,11 +133,11 @@ const componentVariants = {
       error: "bg-error text-error-content",
       neutral: "bg-neutral text-neutral-content",
     },
-    subtle: {
-      success: "bg-success-subtle/40 text-success-subtle-content",
-      warning: "bg-warning-subtle/40 text-warning-subtle-content",
-      error: "bg-error-subtle/40 text-error-subtle-content",
-      neutral: "bg-neutral-subtle/40 text-neutral-subtle-content",
+    tinted: {
+      success: "bg-success/10 text-success",
+      warning: "bg-warning/10 text-warning",
+      error: "bg-error/10 text-error",
+      neutral: "bg-neutral/10 text-neutral",
     },
   },
   radius: {
@@ -158,72 +158,59 @@ const Icons = {
   neutral: InfoIcon,
 };
 
-const Alert = forwardRef<Ref, AlertProps>(
-  (
-    {
-      // Component props
-      children,
-      title,
-      status = "success",
-      variant = "subtle",
-      radius = "xl",
-      hasIcon = true,
-      customIcon,
-      isDismissable = true,
-      isVisible = true,
-      className = "",
-      ...rest
-    },
-    ref
-  ) => {
-    // Resolve icon based on status prop
-    const IconComponent = Icons[status];
+export default function Alert({
+  children,
+  title,
+  status = "success",
+  variant = "filled",
+  radius = "xl",
+  hasIcon = true,
+  customIcon,
+  isDismissable = true,
+  isVisible = true,
+  className = "",
+  ...rest
+}: AlertProps) {
+  // Resolve icon based on status prop
+  const IconComponent = Icons[status];
 
-    // State
-    const [isShown, setIsShown] = useState(isVisible);
+  // State
+  const [isShown, setIsShown] = useState(isVisible);
 
-    function hideAlert() {
-      setIsShown(false);
-    }
-
-    // Destroy component if close button is clicked
-    if (!isShown) {
-      return null;
-    }
-
-    return (
-      <div
-        ref={ref}
-        className={clsx(
-          componentVariants.base,
-          componentVariants.variants[variant][status],
-          componentVariants.radius[radius],
-          className
-        )}
-        {...rest}
-      >
-        <div className="mr-auto flex flex-col items-start justify-start gap-2 xs:gap-3 sm:flex-row lg:gap-5">
-          {hasIcon && !customIcon ? (
-            <div className="hidden xs:block sm:pt-1">
-              <IconComponent aria-hidden="true" className="h-6 w-6" />
-            </div>
-          ) : (
-            <div className="hidden h-6 w-6 xs:block sm:pt-1" aria-hidden="true">
-              {customIcon}
-            </div>
-          )}
-          <div>
-            {title && <div className="text-lg font-semibold">{title}</div>}
-            <div>{children}</div>
-          </div>
-        </div>
-        {isDismissable && <CloseButton size="sm" onClick={hideAlert} />}
-      </div>
-    );
+  function hideAlert() {
+    setIsShown(false);
   }
-);
 
-export type Ref = HTMLDivElement;
-Alert.displayName = "Alert";
-
-export default Alert;
+  // Destroy component if close button is clicked
+  if (!isShown) {
+    return null;
+  }
+  return (
+    <div
+      className={clsx(
+        componentVariants.base,
+        componentVariants.variants[variant][status],
+        componentVariants.radius[radius],
+        className
+      )}
+      {...rest}
+    >
+      <div className="mr-auto flex flex-col items-start justify-start gap-2 xs:gap-3 sm:flex-row lg:gap-5">
+        {hasIcon && !customIcon ? (
+          <div className="hidden xs:block sm:pt-1">
+            <IconComponent aria-hidden="true" className="h-6 w-6" />
+          </div>
+        ) : (
+          <div className="hidden h-6 w-6 xs:block sm:pt-1" aria-hidden="true">
+            {customIcon}
+          </div>
+        )}
+        <div>
+          {title && <div className="text-lg font-semibold">{title}</div>}
+          <div>{children}</div>
+        </div>
+      </div>
+      {isDismissable && <CloseButton size="sm" onClick={hideAlert} />}
+    </div>
+  );
+}

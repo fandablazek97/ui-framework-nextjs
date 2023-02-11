@@ -5,17 +5,16 @@
     --token-black: 0deg 0% 0%;
 
     /* Grays */
-    --token-gray-50: 204deg 45% 98%;
-    --token-gray-100: 210deg 31% 95%;
-    --token-gray-200: 215deg 27% 91%;
-    --token-gray-300: 213deg 22% 84%;
-    --token-gray-400: 214deg 18% 69%;
-    --token-gray-500: 217deg 13% 52%;
-    --token-gray-600: 219deg 15% 35%;
-    --token-gray-700: 220deg 20% 23%;
-    --token-gray-800: 221deg 23% 14%;
-    --token-gray-900: 229deg 19% 11%;
-    --token-gray-950: 229deg 19% 9%;
+    --token-gray-50: 240deg 0% 98%;
+    --token-gray-100: 240deg 5% 96%;
+    --token-gray-200: 240deg 6% 90%;
+    --token-gray-300: 240deg 5% 84%;
+    --token-gray-400: 240deg 5% 65%;
+    --token-gray-500: 240deg 3% 46%;
+    --token-gray-600: 240deg 5% 34%;
+    --token-gray-700: 240deg 5% 26%;
+    --token-gray-800: 240deg 4% 16%;
+    --token-gray-900: 240deg 6% 10%;
 
     /* Primary */
     --token-primary-50: 345deg 75% 97%;
@@ -31,17 +30,17 @@
     --token-primary-950: 343deg 70% 18%;
 
     /* Secondary */
-    --token-secondary-50: 138deg 62% 97%;
-    --token-secondary-100: 134deg 76% 94%;
-    --token-secondary-200: 136deg 70% 87%;
-    --token-secondary-300: 135deg 67% 77%;
-    --token-secondary-400: 132deg 58% 66%;
-    --token-secondary-500: 128deg 45% 56%;
-    --token-secondary-600: 128deg 37% 46%;
-    --token-secondary-700: 129deg 37% 36%;
-    --token-secondary-800: 132deg 36% 29%;
-    --token-secondary-900: 134deg 35% 24%;
-    --token-secondary-950: 134deg 35% 17%;
+    --token-secondary-50: 187deg 100% 97%;
+    --token-secondary-100: 186deg 90% 92%;
+    --token-secondary-200: 189deg 90% 85%;
+    --token-secondary-300: 190deg 87% 75%;
+    --token-secondary-400: 192deg 78% 65%;
+    --token-secondary-500: 194deg 59% 56%;
+    --token-secondary-600: 197deg 48% 46%;
+    --token-secondary-700: 198deg 48% 37%;
+    --token-secondary-800: 198deg 46% 31%;
+    --token-secondary-900: 200deg 45% 26%;
+    --token-secondary-950: 200deg 44% 16%;
 
     /* Success */
     --token-success-50: 148deg 68% 96%;

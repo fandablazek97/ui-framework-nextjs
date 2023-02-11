@@ -5,9 +5,17 @@ import { forwardRef, useState } from "react";
 type BadgeProps = {
   as?: React.ElementType;
   size?: "sm" | "md" | "lg";
-  variant?: "filled" | "subtle" | "outlined";
-  color?: "primary" | "secondary" | "success" | "warning" | "error" | "neutral";
-  radius?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full";
+  variant?: "filled" | "tinted" | "outlined" | "unstyled";
+  color?:
+    | "primary"
+    | "secondary"
+    | "success"
+    | "warning"
+    | "error"
+    | "neutral"
+    | "white"
+    | "black";
+  radius?: "default" | "none" | "sm" | "md" | "lg" | "full";
   hasDot?: boolean;
   isDismissable?: boolean;
   children: React.ReactNode;
@@ -32,14 +40,18 @@ const componentVariants = {
       warning: "bg-warning text-warning-content",
       error: "bg-error text-error-content",
       neutral: "bg-neutral text-neutral-content",
+      white: "bg-gray-50 text-gray-900",
+      black: "bg-gray-900 text-white",
     },
-    subtle: {
-      primary: "bg-primary-subtle/30 text-primary-subtle-content",
-      secondary: "bg-secondary-subtle/30 text-secondary-subtle-content",
-      success: "bg-success-subtle/30 text-success-subtle-content",
-      warning: "bg-warning-subtle/30 text-warning-subtle-content",
-      error: "bg-error-subtle/30 text-error-subtle-content",
-      neutral: "bg-neutral-subtle/30 text-neutral-subtle-content",
+    tinted: {
+      primary: "bg-primary/10 text-primary",
+      secondary: "bg-secondary/10 text-secondary",
+      success: "bg-success/10 text-success",
+      warning: "bg-warning/10 text-warning",
+      error: "bg-error/10 text-error",
+      neutral: "bg-neutral/10 text-neutral",
+      white: "bg-gray-900/10 text-gray-900",
+      black: "bg-white/10 text-white",
     },
     outlined: {
       primary: "ring-1 ring-primary text-primary",
@@ -48,18 +60,29 @@ const componentVariants = {
       warning: "ring-1 ring-warning text-warning",
       error: "ring-1 ring-error text-error",
       neutral: "ring-1 ring-neutral text-neutral",
+      white: "ring-1 ring-gray-50 text-gray-50",
+      black: "ring-1 ring-gray-900 text-gray-900",
+    },
+    unstyled: {
+      primary: "",
+      secondary: "",
+      success: "",
+      warning: "",
+      error: "",
+      neutral: "",
+      white: "",
+      black: "",
     },
   },
   radius: {
+    default: "rounded",
     none: "rounded-none",
     sm: "rounded-sm",
-    md: "rounded",
-    lg: "rounded-lg",
-    xl: "rounded-xl",
-    "2xl": "rounded-2xl",
+    md: "rounded-md",
+    lg: "rounded-xl",
     full: "rounded-full",
   },
-  dot: "w-2 h-2 mr-1.5 rounded-full",
+  dot: "w-2 h-2 bg-current mr-1.5 rounded-full opacity-70",
 };
 
 const Badge = forwardRef<Ref, BadgeProps>(
@@ -68,10 +91,10 @@ const Badge = forwardRef<Ref, BadgeProps>(
       // Component props
       as: Tag = "span",
       size = "md",
-      variant = "subtle",
+      variant = "tinted",
       color = "primary",
       radius = "full",
-      hasDot = false,
+      hasDot = true,
       isDismissable = false,
       className = "",
       children,
@@ -104,9 +127,7 @@ const Badge = forwardRef<Ref, BadgeProps>(
         )}
         {...rest}
       >
-        {hasDot && (
-          <span className={clsx(componentVariants.dot, "bg-current")} />
-        )}
+        {hasDot && <span className={componentVariants.dot} />}
         {children}
         {isDismissable && (
           <CloseButton

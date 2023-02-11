@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
 // const colors = require("tailwindcss/colors");
-const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
   theme: {
@@ -14,10 +13,24 @@ module.exports = {
       "2xl": "1536px",
     },
     fontFamily: {
-      sans: ["var(--font-sans)", ...defaultTheme.fontFamily.sans],
-      serif: ["var(--font-serif)", ...defaultTheme.fontFamily.serif],
-      display: ["var(--font-display)", ...defaultTheme.fontFamily.sans],
-      mono: ["var(--font-mono)", ...defaultTheme.fontFamily.mono],
+      sans: [
+        "var(--font-sans)",
+        "sans-serif",
+        "ui-sans-serif",
+        "system-ui",
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Segoe UI Symbol",
+        "Noto Color Emoji",
+      ],
+      serif: ["var(--font-serif)", "serif", "ui-serif", "Georgia"],
+      display: [
+        "var(--font-display)",
+        "sans-serif",
+        "ui-sans-serif",
+        "system-ui",
+      ],
+      mono: ["var(--font-mono)", "monospace", "ui-monospace", "SFMono-Regular"],
     },
     extend: {
       fontSize: {

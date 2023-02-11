@@ -1,6 +1,7 @@
 // Radix UI component docs: https://www.radix-ui.com/docs/primitives/components/avatar
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import clsx from "clsx";
+import { useMemo } from "react";
 
 //
 // Avatar group component
@@ -128,10 +129,13 @@ export function Avatar({
     .join("");
 
   // Pick one of the random background colors
-  const randomBackgroundColor =
-    randomBackgroundClasses[
+  const randomBackgroundColor = useMemo(() => {
+    if (!randomFallbackColor) return;
+
+    return randomBackgroundClasses[
       Math.floor(Math.random() * randomBackgroundClasses.length)
     ];
+  }, [randomFallbackColor]);
 
   return (
     <AvatarPrimitive.Root
@@ -160,7 +164,7 @@ export function Avatar({
           {initials}
         </AvatarPrimitive.Fallback>
       ) : (
-        <AvatarPrimitive.Fallback className="text-body-invert flex h-full w-full items-center justify-center bg-content text-[1em] font-semibold uppercase leading-none">
+        <AvatarPrimitive.Fallback className="bg-content flex h-full w-full items-center justify-center text-[1em] font-semibold uppercase leading-none text-body-invert">
           {initials}
         </AvatarPrimitive.Fallback>
       )}

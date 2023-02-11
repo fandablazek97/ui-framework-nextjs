@@ -1,8 +1,7 @@
 import Favicon from "@components/Favicon";
 import Navbar from "@components/unstable/Navbar";
-import Head from "./Head";
+import NextHead from "next/head";
 import ScrollToTop from "./ScrollToTop";
-// import CookieConsent from "./unstable/CookieConsent";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -11,15 +10,19 @@ type LayoutProps = {
 export default function Layout({ children }: LayoutProps) {
   return (
     <>
-      {/* <CookieConsent /> */}
-      <Head />
       <Favicon />
+      <NextHead>
+        <meta charSet="UTF-8" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=2.0"
+        />
+      </NextHead>
       <header>
         <Navbar />
       </header>
       <main id="content">{children}</main>
       <ScrollToTop />
-      {/* <Footer /> */}
     </>
   );
 }

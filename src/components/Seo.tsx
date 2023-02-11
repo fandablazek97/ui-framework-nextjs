@@ -1,3 +1,4 @@
+import { siteConfig } from "@configs/site-config";
 import { NextSeo } from "next-seo";
 
 type SeoProps = {
@@ -9,14 +10,14 @@ type SeoProps = {
 
 export default function Seo({
   title,
-  description,
+  description = siteConfig.seo.defaultDescription,
   noIndex = false,
   noFollow = false,
 }: SeoProps) {
   return (
     <NextSeo
       title={title}
-      titleTemplate="%s | Značka"
+      titleTemplate={siteConfig.seo.titleTemplate}
       description={description}
       openGraph={{ title, description }}
       noindex={noIndex}

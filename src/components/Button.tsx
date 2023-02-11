@@ -4,7 +4,8 @@ import { forwardRef, useState } from "react";
 
 type ButtonProps = {
   children: React.ReactNode;
-  as?: React.ElementType;
+  href?: string;
+  isExternal?: boolean;
 
   variant?: "filled" | "subtle" | "outlined" | "plain";
   hoverEffect?:
@@ -15,7 +16,15 @@ type ButtonProps = {
     | "slide-left"
     | "slide-top"
     | "slide-bottom";
-  color?: "primary" | "secondary" | "success" | "warning" | "error" | "neutral";
+  color?:
+    | "primary"
+    | "secondary"
+    | "success"
+    | "warning"
+    | "error"
+    | "neutral"
+    | "white"
+    | "black";
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   radius?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full";
   leftIcon?: JSX.Element;
@@ -33,7 +42,7 @@ type ButtonProps = {
 
 // Component Variant Styles
 const componentVariants = {
-  root: "relative isolate group/button inline-flex items-center justify-center font-medium no-underline cursor-pointer overflow-hidden",
+  root: "relative isolate group/button inline-flex items-center justify-center font-medium no-underline overflow-hidden cursor-pointer leading-none focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-blue-500",
   transition: "transition duration-400 ease-out",
   layer: {
     // Base layer applied to the root of the button
@@ -45,6 +54,9 @@ const componentVariants = {
         warning: "text-warning-content",
         error: "text-error-content",
         neutral: "text-neutral-content",
+        white: "text-gray-900",
+        gray: "text-white",
+        black: "text-white",
       },
       subtle: {
         primary: "text-primary-subtle-content",
@@ -53,6 +65,8 @@ const componentVariants = {
         warning: "text-warning-subtle-content",
         error: "text-error-subtle-content",
         neutral: "text-neutral-subtle-content",
+        white: "text-white",
+        black: "text-gray-900",
       },
       outlined: {
         primary:
@@ -67,6 +81,8 @@ const componentVariants = {
           "text-error ring-1 ring-inset ring-error hover:text-error-content",
         neutral:
           "text-neutral ring-1 ring-inset ring-neutral hover:text-neutral-content",
+        white: "text-white ring-1 ring-inset ring-white hover:text-gray-900",
+        black: "text-gray-900 ring-1 ring-inset ring-gray-900 hover:text-white",
       },
       plain: {
         primary: "text-primary-subtle-content",
@@ -75,6 +91,8 @@ const componentVariants = {
         warning: "text-warning-subtle-content",
         error: "text-error-subtle-content",
         neutral: "text-neutral-subtle-content",
+        white: "text-white",
+        black: "text-gray-900",
       },
     },
     // Background layer visible in a initial state
@@ -86,6 +104,8 @@ const componentVariants = {
         warning: "bg-warning",
         error: "bg-error",
         neutral: "bg-neutral",
+        white: "bg-white",
+        black: "bg-gray-900",
       },
       subtle: {
         primary: "bg-primary-subtle/30",
@@ -94,6 +114,8 @@ const componentVariants = {
         warning: "bg-warning-subtle/30",
         error: "bg-error-subtle/30",
         neutral: "bg-neutral-subtle/30",
+        white: "bg-gray-600/30",
+        black: "bg-gray-400/30",
       },
       outlined: {
         primary: "bg-transparent",
@@ -102,6 +124,8 @@ const componentVariants = {
         warning: "bg-transparent",
         error: "bg-transparent",
         neutral: "bg-transparent",
+        white: "bg-transparent",
+        black: "bg-transparent",
       },
       plain: {
         primary: "bg-transparent",
@@ -110,6 +134,8 @@ const componentVariants = {
         warning: "bg-transparent",
         error: "bg-transparent",
         neutral: "bg-transparent",
+        white: "bg-transparent",
+        black: "bg-transparent",
       },
     },
     // background overlay layer visible on hover and making the hover effect
@@ -121,6 +147,8 @@ const componentVariants = {
         warning: "bg-warning-hover",
         error: "bg-error-hover",
         neutral: "bg-neutral-hover",
+        white: "bg-gray-300",
+        black: "bg-gray-700",
       },
       subtle: {
         primary: "bg-primary-subtle/70",
@@ -129,6 +157,8 @@ const componentVariants = {
         warning: "bg-warning-subtle/70",
         error: "bg-error-subtle/70",
         neutral: "bg-neutral-subtle/70",
+        white: "bg-gray-600/70",
+        black: "bg-gray-400/70",
       },
       outlined: {
         primary: "bg-primary",
@@ -137,6 +167,8 @@ const componentVariants = {
         warning: "bg-warning",
         error: "bg-error",
         neutral: "bg-neutral",
+        white: "bg-white",
+        black: "bg-gray-900",
       },
       plain: {
         primary: "bg-primary-subtle/50",
@@ -145,6 +177,8 @@ const componentVariants = {
         warning: "bg-warning-subtle/50",
         error: "bg-error-subtle/50",
         neutral: "bg-neutral-subtle/50",
+        white: "bg-gray-600/50",
+        black: "bg-gray-400/50",
       },
     },
   },
@@ -158,11 +192,11 @@ const componentVariants = {
     full: "rounded-full",
   },
   sizes: {
-    xs: "px-2 py-1 text-xs leading-3 sm:px-2.5 sm:py-1.5 sm:text-xs sm:leading-3",
-    sm: "px-2.5 py-1.5 text-xs leading-3 sm:px-3 sm:py-2 sm:text-sm sm:leading-4",
-    md: "px-3 py-2 text-sm leading-4 sm:px-4 sm:py-2.5 sm:text-sm sm:leading-5",
-    lg: "px-4 py-2.5 text-sm leading-5 sm:px-4 sm:py-3 sm:text-base sm:leading-6",
-    xl: "px-4 py-3 text-base leading-6 sm:px-6 sm:py-4 sm:text-base sm:leading-7",
+    xs: "px-2.5 py-1.5 text-xs",
+    sm: "px-3.5 py-2 text-sm",
+    md: "px-5 py-3 text-sm",
+    lg: "px-6 py-3.5 text-base",
+    xl: "px-7 py-4 text-lg",
   },
   // Applied to the hover overlay layer and making the hover effect it self
   hoverEffect: {
@@ -193,7 +227,7 @@ const Button = forwardRef<Ref, ButtonProps>(
       variant = "filled",
       hoverEffect = "expand",
       color = "success",
-      radius = "lg",
+      radius = "md",
       size = "md",
       leftIcon,
       rightIcon,
@@ -208,6 +242,8 @@ const Button = forwardRef<Ref, ButtonProps>(
     },
     ref
   ) => {
+    // If href is passed, we render an anchor tag
+
     // State detecting if the button is hovered
     // for appling "will-change" for performance
     const [isHovered, setIsHovered] = useState(false);
@@ -263,14 +299,22 @@ const Button = forwardRef<Ref, ButtonProps>(
         {leftIcon && (
           <span
             aria-hidden="true"
-            className={clsx("z-10 mr-2 scale-[1.15]", isLoading && "invisible")}
+            className={clsx(
+              "z-10 mr-2 translate-x-0 scale-[1.15] transform-gpu",
+              isLoading && "invisible"
+            )}
           >
             {leftIcon}
           </span>
         )}
 
         {/* Text */}
-        <span className={clsx("z-10", isLoading && "invisible")}>
+        <span
+          className={clsx(
+            "z-10 translate-x-0 transform-gpu",
+            isLoading && "invisible"
+          )}
+        >
           {children}
         </span>
 
@@ -278,7 +322,10 @@ const Button = forwardRef<Ref, ButtonProps>(
         {rightIcon && (
           <span
             aria-hidden="true"
-            className={clsx("z-10 ml-2 scale-[1.15]", isLoading && "invisible")}
+            className={clsx(
+              "z-10 ml-2 translate-x-0 scale-[1.15] transform-gpu",
+              isLoading && "invisible"
+            )}
           >
             {rightIcon}
           </span>
@@ -290,7 +337,7 @@ const Button = forwardRef<Ref, ButtonProps>(
             size="inherit"
             thickness="inherit"
             color="inherit"
-            className="absolute inset-auto z-[1] m-auto text-[1.4em]"
+            className="absolute inset-auto z-[1] m-auto translate-x-0 transform-gpu text-[1.4em]"
           />
         )}
       </Tag>

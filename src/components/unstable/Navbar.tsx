@@ -1,6 +1,6 @@
-import ModeSwitch from "@components/ModeSwitch";
+import Container from "@components/Container";
+import ThemeSwitch from "@components/ThemeSwitch";
 import { Logo } from "@components/unstable/Logo";
-import Wrapper from "@components/unstable/Wrapper";
 import { routes } from "@configs/routes";
 // import { useScrollPosition } from "@hooks/useScrollPosition";
 import clsx from "clsx";
@@ -88,19 +88,19 @@ function BurgerButton({
     >
       <span
         className={clsx(
-          "bg-body-rich group-hover:bg-surface h-0.5 w-6 origin-center transform-gpu rounded-full transition duration-300 ease-out-back",
+          "h-0.5 w-6 origin-center transform-gpu rounded-full bg-body-rich transition duration-300 ease-out-back group-hover:bg-surface",
           isOpen && "translate-y-[4px] -rotate-45"
         )}
       />
       <span
         className={clsx(
-          "bg-body-rich group-hover:bg-surface h-0.5 w-6 origin-center transform-gpu rounded-full transition duration-300 ease-out-back",
+          "h-0.5 w-6 origin-center transform-gpu rounded-full bg-body-rich transition duration-300 ease-out-back group-hover:bg-surface",
           isOpen && "-translate-y-[4px] rotate-45"
         )}
       />
       <span
         className={clsx(
-          "bg-body-rich absolute inset-0 -z-10 h-full w-full scale-75 rounded-full opacity-0 transition duration-300 ease-out-back group-hover:scale-110 group-hover:opacity-100"
+          "absolute inset-0 -z-10 h-full w-full scale-75 rounded-full bg-body-rich opacity-0 transition duration-300 ease-out-back group-hover:scale-110 group-hover:opacity-100"
         )}
       ></span>
     </button>
@@ -199,16 +199,16 @@ function TouchMenu() {
                   scale: 0,
                   transition: { duration: 0.6 },
                 }}
-                className="bg-surface-100 fixed top-[calc(40px-250vw)] right-[calc(60px-250vw)] h-[500vw] w-[500vw] origin-center rounded-full md:top-[calc(40px-190vw)] md:right-[calc(60px-190vw)] md:h-[380vw] md:w-[380vw] lg:top-[calc(48px-125vw)] lg:right-[calc(60px-125vw)] lg:h-[250vw] lg:w-[250vw]"
+                className="fixed top-[calc(40px-250vw)] right-[calc(60px-250vw)] h-[500vw] w-[500vw] origin-center rounded-full bg-surface-100 md:top-[calc(40px-190vw)] md:right-[calc(60px-190vw)] md:h-[380vw] md:w-[380vw] lg:top-[calc(48px-125vw)] lg:right-[calc(60px-125vw)] lg:h-[250vw] lg:w-[250vw]"
               ></motion.div>
               {/* Menu */}
-              <Wrapper size="lg" className="pt-24 pb-8 sm:pb-12">
+              <Container size="lg" className="pt-24 pb-8 sm:pb-12">
                 <ul className="flex flex-col gap-y-2">
                   {routes.map((route, i) => (
                     <TouchNavLink key={i} i={i} {...route} />
                   ))}
                 </ul>
-              </Wrapper>
+              </Container>
             </motion.div>
           </>
         )}
@@ -253,7 +253,7 @@ export default function Navbar() {
           !isVisible && "-translate-y-full shadow-none"
         )}
       >
-        <Wrapper
+        <Container
           size="lg"
           className="flex items-center justify-between gap-4 py-5 sm:py-6"
         >
@@ -273,14 +273,14 @@ export default function Navbar() {
           </div>
 
           <div>
-            <ModeSwitch />
+            <ThemeSwitch />
           </div>
 
           {/* Mobile navigation */}
           <div>
             <TouchMenu />
           </div>
-        </Wrapper>
+        </Container>
       </nav>
     </header>
   );

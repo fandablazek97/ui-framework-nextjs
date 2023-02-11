@@ -42,7 +42,7 @@ export function CollapseGroup({
 }: CollapseGroupProps) {
   return (
     <div className={className} {...props}>
-      <div className="divide-body-rich/15 flex flex-col divide-y-1">
+      <div className="divide-body-rich/15 flex flex-col divide-y">
         {children}
       </div>
     </div>
@@ -89,14 +89,14 @@ export function Collapse({
           id={"collapse-trigger-" + triggerId}
           aria-controls={"collapse-panel-" + panelID}
           aria-expanded={isOpen ? "true" : "false"}
-          className="text-body-rich flex w-full items-center justify-between py-4"
+          className="text-body-rich flex w-full items-center justify-between py-4 hover:text-primary"
         >
-          <span className="block w-full text-left text-base font-semibold sm:text-lg">
+          <span className="block w-full text-left text-base font-semibold transition-colors duration-300 sm:text-lg">
             {title}
           </span>
           <ChevronDownIcon
             className={clsx(
-              "h-5 w-5 shrink-0 origin-center transition-transform duration-300 ease-out",
+              "h-5 w-5 shrink-0 origin-center transition duration-300 ease-out",
               isOpen && "rotate-180"
             )}
           />
