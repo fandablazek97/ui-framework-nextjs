@@ -5,17 +5,8 @@ import { forwardRef, useState } from "react";
 type BadgeProps = {
   as?: React.ElementType;
   size?: "sm" | "md" | "lg";
-  variant?: "filled" | "tinted" | "outlined" | "unstyled";
-  color?:
-    | "primary"
-    | "secondary"
-    | "success"
-    | "warning"
-    | "error"
-    | "neutral"
-    | "white"
-    | "black";
-  radius?: "default" | "none" | "sm" | "md" | "lg" | "full";
+  intent?: "tinted" | "filled";
+  color?: "primary" | "secondary" | "success" | "warning" | "error" | "gray";
   hasDot?: boolean;
   isDismissable?: boolean;
   children: React.ReactNode;
@@ -26,61 +17,34 @@ type BadgeProps = {
 
 // Component Variant Styles
 const componentVariants = {
-  root: "inline-flex items-center justify-center font-medium",
+  root: "inline-flex items-center justify-center font-medium rounded-full",
   size: {
     sm: "text-xs px-2 py-0.5",
     md: "text-sm px-2.5 py-0.5",
     lg: "text-base px-3.5 py-1",
   },
-  variant: {
-    filled: {
-      primary: "bg-primary text-primary-content",
-      secondary: "bg-secondary text-secondary-content",
-      success: "bg-success text-success-content",
-      warning: "bg-warning text-warning-content",
-      error: "bg-error text-error-content",
-      neutral: "bg-neutral text-neutral-content",
-      white: "bg-gray-50 text-gray-900",
-      black: "bg-gray-900 text-white",
-    },
+  intent: {
     tinted: {
-      primary: "bg-primary/10 text-primary",
-      secondary: "bg-secondary/10 text-secondary",
-      success: "bg-success/10 text-success",
-      warning: "bg-warning/10 text-warning",
-      error: "bg-error/10 text-error",
-      neutral: "bg-neutral/10 text-neutral",
-      white: "bg-gray-900/10 text-gray-900",
-      black: "bg-white/10 text-white",
+      primary:
+        "text-primary-800 dark:text-primary-200 bg-primary-300/30 dark:bg-primary-800/30",
+      secondary:
+        "text-secondary-800 dark:text-secondary-200 bg-secondary-300/30 dark:bg-secondary-800/30",
+      success:
+        "text-success-800 dark:text-success-200 bg-success-300/30 dark:bg-success-800/30",
+      warning:
+        "text-warning-800 dark:text-warning-200 bg-warning-300/30 dark:bg-warning-800/30",
+      error:
+        "text-error-800 dark:text-error-200 bg-error-300/30 dark:bg-error-800/30",
+      gray: "text-gray-800 dark:text-gray-200 bg-gray-300/30 dark:bg-gray-600/30",
     },
-    outlined: {
-      primary: "ring-1 ring-primary text-primary",
-      secondary: "ring-1 ring-secondary text-secondary",
-      success: "ring-1 ring-success text-success",
-      warning: "ring-1 ring-warning text-warning",
-      error: "ring-1 ring-error text-error",
-      neutral: "ring-1 ring-neutral text-neutral",
-      white: "ring-1 ring-gray-50 text-gray-50",
-      black: "ring-1 ring-gray-900 text-gray-900",
+    filled: {
+      primary: "text-primary-50 bg-primary-600",
+      secondary: "text-secondary-50 bg-secondary-600",
+      success: "text-success-50 bg-success-600",
+      warning: "text-warning-50 bg-warning-600",
+      error: "text-error-50 bg-error-600",
+      gray: "text-gray-50 bg-gray-600 dark:bg-gray-600",
     },
-    unstyled: {
-      primary: "",
-      secondary: "",
-      success: "",
-      warning: "",
-      error: "",
-      neutral: "",
-      white: "",
-      black: "",
-    },
-  },
-  radius: {
-    default: "rounded",
-    none: "rounded-none",
-    sm: "rounded-sm",
-    md: "rounded-md",
-    lg: "rounded-xl",
-    full: "rounded-full",
   },
   dot: "w-2 h-2 bg-current mr-1.5 rounded-full opacity-70",
 };
@@ -90,10 +54,9 @@ const Badge = forwardRef<Ref, BadgeProps>(
     {
       // Component props
       as: Tag = "span",
-      size = "md",
-      variant = "tinted",
+      size = "sm",
+      intent = "tinted",
       color = "primary",
-      radius = "full",
       hasDot = true,
       isDismissable = false,
       className = "",
@@ -103,30 +66,26 @@ const Badge = forwardRef<Ref, BadgeProps>(
     },
     ref
   ) => {
-    // Component logic
+    // State for removing badge component
     const [isDismissed, setIsDismissed] = useState(false);
 
     function removeBadge() {
       setIsDismissed(true);
     }
 
+    const rootClassName = clsx(
+      componentVariants.root,
+      componentVariants.size[size],
+      componentVariants.intent[intent][color],
+      className
+    );
+
     // Destroy component if dismissed
     if (isDismissed) return null;
 
     return (
       // Component Markup
-      <Tag
-        ref={ref}
-        onClick={onClick}
-        className={clsx(
-          componentVariants.root,
-          componentVariants.size[size],
-          componentVariants.variant[variant][color],
-          componentVariants.radius[radius],
-          className
-        )}
-        {...rest}
-      >
+      <Tag ref={ref} onClick={onClick} className={rootClassName} {...rest}>
         {hasDot && <span className={componentVariants.dot} />}
         {children}
         {isDismissable && (

@@ -32,7 +32,9 @@ type CloseButtonProps = {
 
 // Component Variant Styles
 const componentVariants = {
-  base: "flex items-center aspect-square shrink-0 justify-center relative isolate transition duration-200 cursor-pointer group/close-button",
+  root: "flex items-center aspect-square shrink-0 justify-center relative isolate cursor-pointer group/close-button",
+  transition: "transition duration-200",
+  radius: "rounded-full",
   size: {
     root: {
       xs: "p-0.5",
@@ -51,15 +53,6 @@ const componentVariants = {
       inherit: "h-[1em] w-[1em]",
     },
   },
-  radius: {
-    none: "rounded-none",
-    sm: "rounded-sm",
-    md: "rounded",
-    lg: "rounded-lg",
-    xl: "rounded-xl",
-    "2xl": "rounded-2xl",
-    full: "rounded-full",
-  },
 };
 
 const CloseButton = forwardRef<Ref, CloseButtonProps>(
@@ -67,7 +60,6 @@ const CloseButton = forwardRef<Ref, CloseButtonProps>(
     {
       // Component props
       size = "md",
-      radius = "full",
       className = "",
       onClick,
       ...rest
@@ -81,7 +73,8 @@ const CloseButton = forwardRef<Ref, CloseButtonProps>(
         ref={ref}
         onClick={onClick}
         className={clsx(
-          componentVariants.base,
+          componentVariants.root,
+          componentVariants.transition,
           componentVariants.size.root[size],
           className
         )}
@@ -97,8 +90,8 @@ const CloseButton = forwardRef<Ref, CloseButtonProps>(
         />
         <span
           className={clsx(
-            componentVariants.radius[radius],
-            "absolute top-1/2 left-1/2 aspect-square h-auto w-full -translate-x-1/2 -translate-y-1/2 bg-current opacity-0 transition-opacity duration-200 group-hover/close-button:opacity-15"
+            componentVariants.radius,
+            "group-hover/close-button:opacity-15 absolute top-1/2 left-1/2 aspect-square h-auto w-full -translate-x-1/2 -translate-y-1/2 bg-current opacity-0 transition-opacity duration-200"
           )}
         ></span>
       </button>

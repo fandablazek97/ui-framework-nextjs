@@ -73,7 +73,7 @@ export default function ThemeSwitch({ className = "" }: ThemeSwitchProps) {
       aria-label="Přepnout tmavý / světlý režim"
       className={clsx(
         className,
-        "group inline-flex h-12 w-12 items-center justify-center text-body-muted transition-colors duration-300 ease-in-out hover:text-body-rich"
+        "group inline-flex h-12 w-12 items-center justify-center text-gray-700 transition-colors duration-300 ease-in-out dark:text-gray-300"
       )}
       onClick={toggleTheme}
     >

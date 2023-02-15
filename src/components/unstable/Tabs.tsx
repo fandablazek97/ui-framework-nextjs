@@ -19,7 +19,7 @@ export function Tab({
       {({ selected }) => (
         <button
           className={clsx(
-            "relative flex items-center justify-center px-4 py-2 [&:not(:focus-visible)]:focus:outline-none",
+            "relative flex items-center justify-center px-4 py-2 focus-visible:outline-none",
             className
           )}
         >
@@ -27,7 +27,7 @@ export function Tab({
             <motion.div
               layoutId="tabBackground"
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="border-surface-100 absolute inset-0 h-full w-full rounded-[36px] border bg-body dark:border-none dark:bg-gray-100"
+              className="absolute inset-0 h-full w-full rounded-full bg-white dark:border-none dark:bg-gray-100"
             ></motion.div>
           )}
           <span
@@ -46,7 +46,7 @@ export function Tab({
 
 export function TabList({ children }: { children: React.ReactNode }) {
   return (
-    <TabPrimitive.List className="bg-surface-50 flex space-x-2 rounded-full p-1.5">
+    <TabPrimitive.List className="flex space-x-2 rounded-full bg-gray-100 p-1.5 dark:bg-gray-800">
       {children}
     </TabPrimitive.List>
   );

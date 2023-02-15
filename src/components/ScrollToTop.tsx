@@ -67,13 +67,13 @@ export default function ScrollToTop({
             animate={{ opacity: 1, transition: { duration: 0.3 } }}
             exit={{ opacity: 0, transition: { duration: 0.3 } }}
             className={clsx(
-              "text-body-invert group fixed left-7 bottom-7 z-fixed flex h-12 w-12 items-center justify-center",
+              "z-fixed group fixed left-7 bottom-7 flex h-12 w-12 items-center justify-center text-white dark:text-gray-900",
               className
             )}
             {...rest}
           >
             <ChevronUpIcon className="h-6 w-6" />
-            <span className="bg-body-rich absolute inset-0 -z-10 h-full w-full rounded-full transition duration-300 ease-out-back group-hover:scale-125"></span>
+            <span className="ease-out-back absolute inset-0 -z-10 h-full w-full rounded-full bg-gray-900 transition duration-300 group-hover:scale-125 dark:bg-white"></span>
           </motion.button>
         )}
       </AnimatePresence>

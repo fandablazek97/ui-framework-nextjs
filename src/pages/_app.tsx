@@ -9,16 +9,15 @@ import { useEffect } from "react";
 import { ThemeProvider } from "next-themes";
 
 // Global stylesheet
-import "../styles/globals.css";
+import "../styles/global.css";
 
 // Fonts: https://nextjs.org/docs/api-reference/next/font
 import { Inter } from "@next/font/google";
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" }); // --font-display | --font-serif | --font-mono
 
 export default function App({ Component, pageProps }: AppProps) {
-  const router = useRouter();
-
   // Disable smooth scroll on route change: https://github.com/vercel/next.js/issues/20125#issuecomment-757547865
+  const router = useRouter();
   useEffect(() => {
     router.events.on("routeChangeStart", () => {
       document.documentElement.classList.add("!scroll-auto");
@@ -29,7 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
   });
 
   return (
-    <div id="font-provider" className={`${inter.variable} font-sans`}>
+    <div className={`${inter.variable} font-sans`}>
       <ThemeProvider
         attribute="class"
         enableSystem={siteConfig.theme.enableSystemTheme}

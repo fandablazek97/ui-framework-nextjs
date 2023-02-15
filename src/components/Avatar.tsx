@@ -44,15 +44,7 @@ type AvatarProps = {
   radius?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full";
   randomFallbackColor?: boolean;
   ringWidth?: "none" | "sm" | "md" | "lg";
-  ringColor?:
-    | "none"
-    | "inherit"
-    | "surface"
-    | "white"
-    | "black"
-    | "primary"
-    | "secondary"
-    | "neutral";
+  ringColor?: "none" | "inherit" | "white" | "black" | "primary" | "secondary";
   className?: string;
   [x: string]: any;
 };
@@ -87,12 +79,10 @@ const componentVariants = {
   ringColor: {
     none: "",
     inherit: "ring-current",
-    surface: "ring-surface",
     white: "ring-white",
-    black: "ring-black",
+    black: "ring-gray-900",
     primary: "ring-primary",
     secondary: "ring-secondary",
-    neutral: "ring-neutral",
   },
 };
 
@@ -164,7 +154,7 @@ export function Avatar({
           {initials}
         </AvatarPrimitive.Fallback>
       ) : (
-        <AvatarPrimitive.Fallback className="bg-content flex h-full w-full items-center justify-center text-[1em] font-semibold uppercase leading-none text-body-invert">
+        <AvatarPrimitive.Fallback className="flex h-full w-full items-center justify-center bg-primary-100 text-[1em] font-semibold uppercase leading-none text-primary-800 dark:bg-primary-800 dark:text-primary-200">
           {initials}
         </AvatarPrimitive.Fallback>
       )}

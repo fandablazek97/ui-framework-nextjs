@@ -31,7 +31,7 @@ type TemplateRefProps = {
 //   },
 // }
 
-const TemplateRef = forwardRef<RefType, TemplateRefProps>(
+const TemplateRef = forwardRef<HTMLElement, TemplateRefProps>(
   (
     {
       // Component props
@@ -53,7 +53,5 @@ const TemplateRef = forwardRef<RefType, TemplateRefProps>(
   }
 );
 
-export type RefType = HTMLElement;
 TemplateRef.displayName = "TemplateRef";
-
 export default TemplateRef;

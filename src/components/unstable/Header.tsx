@@ -1,11 +1,10 @@
 import Container from "@components/Container";
+import Link from "@components/Link";
 import ThemeSwitch from "@components/ThemeSwitch";
 import { Logo } from "@components/unstable/Logo";
-import { routes } from "@configs/routes";
-// import { useScrollPosition } from "@hooks/useScrollPosition";
+import { contact, routes, socials } from "@configs/navigation";
 import clsx from "clsx";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -18,11 +17,10 @@ function DesktopNavLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
+      hoverEffect="scale-up"
       className={clsx(
         "text-sm",
-        matches
-          ? "pointer-events-none cursor-default text-primary"
-          : "text-body"
+        matches ? "text-primary" : "text-gray-800 dark:text-white"
       )}
     >
       {label}
@@ -44,14 +42,12 @@ function TouchNavLink({
   return (
     <li
       className={clsx(
-        "font-sans text-lg font-bold sm:text-2xl",
-        matches
-          ? "pointer-events-none cursor-default text-primary"
-          : "text-body-rich"
+        "font-sans text-xl font-bold sm:text-2xl md:text-3xl lg:text-5xl",
+        matches ? "text-primary" : "text-gray-800 dark:text-white"
       )}
     >
-      <Link href={href} passHref legacyBehavior>
-        <motion.a
+      <Link href={href} hoverEffect="scale-up">
+        <motion.span
           initial={{ opacity: 0, y: 16 }}
           animate={{
             opacity: 1,
@@ -65,7 +61,7 @@ function TouchNavLink({
           className="block"
         >
           {label}
-        </motion.a>
+        </motion.span>
       </Link>
     </li>
   );
@@ -82,25 +78,25 @@ function BurgerButton({
     <button
       aria-label="Otevřít / zavřít menu"
       className={clsx(
-        "group relative z-offcanvas-above flex h-12 w-12 flex-col items-center justify-center gap-1.5 rounded-full"
+        "z-offcanvas-above group relative flex h-12 w-12 flex-col items-center justify-center gap-1.5 rounded-full"
       )}
       onClick={onClick}
     >
       <span
         className={clsx(
-          "h-0.5 w-6 origin-center transform-gpu rounded-full bg-body-rich transition duration-300 ease-out-back group-hover:bg-surface",
+          "ease-out-back h-0.5 w-6 origin-center transform-gpu rounded-full bg-gray-900 transition duration-300 group-hover:bg-white dark:bg-white dark:group-hover:bg-gray-900",
           isOpen && "translate-y-[4px] -rotate-45"
         )}
       />
       <span
         className={clsx(
-          "h-0.5 w-6 origin-center transform-gpu rounded-full bg-body-rich transition duration-300 ease-out-back group-hover:bg-surface",
+          "ease-out-back h-0.5 w-6 origin-center transform-gpu rounded-full bg-gray-900 transition duration-300 group-hover:bg-white dark:bg-white dark:group-hover:bg-gray-900",
           isOpen && "-translate-y-[4px] rotate-45"
         )}
       />
       <span
         className={clsx(
-          "absolute inset-0 -z-10 h-full w-full scale-75 rounded-full bg-body-rich opacity-0 transition duration-300 ease-out-back group-hover:scale-110 group-hover:opacity-100"
+          "ease-out-back absolute inset-0 -z-10 h-full w-full scale-75 rounded-full bg-gray-900 opacity-0 transition duration-300 group-hover:scale-110 group-hover:opacity-100 dark:bg-white"
         )}
       ></span>
     </button>
@@ -134,8 +130,7 @@ function TouchMenu() {
     }
   }, [isOpen, setIsOpen]);
 
-  // Prevents closing the menu when Link is clicked,
-  // but new page is not fully loaded yet
+  // Prevents closing menu while loading new page,
   useEffect(() => {
     if (!isOpen) return;
 
@@ -158,7 +153,7 @@ function TouchMenu() {
       <AnimatePresence initial={false}>
         {isOpen && (
           <>
-            {/* Overlay - if needed for changes */}
+            {/* Overlay - premade if needed for changes */}
             {/* <motion.div
               initial={{ opacity: 0 }}
               animate={{
@@ -176,38 +171,74 @@ function TouchMenu() {
 
             {/* Panel with content */}
             <motion.div
-              // initial={{ opacity: 0, y: -64 }}
-              // animate={{
-              //   opacity: 1,
-              //   y: 0,
-              //   transition: { duration: 0.4, ease: "easeOut" },
-              // }}
-              // exit={{
-              //   opacity: 0,
-              //   y: -64,
-              //   transition: { duration: 0.2 },
-              // }}
-              className="fixed inset-0 z-offcanvas"
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                transition: { duration: 0.4, ease: [0.33, 1, 0.68, 1] },
+              }}
+              exit={{
+                opacity: 0,
+                transition: { duration: 0.15, ease: [0.33, 1, 0.68, 1] },
+              }}
+              className="z-offcanvas fixed inset-0 min-h-screen w-screen bg-gray-300 dark:bg-gray-800"
             >
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{
-                  scale: 1,
-                  transition: { duration: 0.8, ease: "easeOut" },
-                }}
-                exit={{
-                  scale: 0,
-                  transition: { duration: 0.6 },
-                }}
-                className="fixed top-[calc(40px-250vw)] right-[calc(60px-250vw)] h-[500vw] w-[500vw] origin-center rounded-full bg-surface-100 md:top-[calc(40px-190vw)] md:right-[calc(60px-190vw)] md:h-[380vw] md:w-[380vw] lg:top-[calc(48px-125vw)] lg:right-[calc(60px-125vw)] lg:h-[250vw] lg:w-[250vw]"
-              ></motion.div>
               {/* Menu */}
-              <Container size="lg" className="pt-24 pb-8 sm:pb-12">
-                <ul className="flex flex-col gap-y-2">
-                  {routes.map((route, i) => (
-                    <TouchNavLink key={i} i={i} {...route} />
-                  ))}
-                </ul>
+              <Container
+                size="md"
+                className="h-full pt-24 pb-8 sm:pb-12 lg:flex lg:items-center"
+              >
+                <div className="grid w-full gap-8 lg:grid-cols-7 lg:pb-16">
+                  {/* Navigace */}
+                  <div className="col-span-1 lg:order-3 lg:col-span-2">
+                    <span className="mb-3 block text-xs uppercase opacity-60 sm:text-sm lg:mb-6">
+                      Menu
+                    </span>
+                    <ul className="flex flex-col items-start gap-y-2 lg:gap-y-5">
+                      {routes.map((route, i) => (
+                        <TouchNavLink key={i} i={i} {...route} />
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Kontaktní údaje */}
+                  <div className="col-span-1 lg:order-2 lg:col-span-2">
+                    <span className="mb-3 block text-xs uppercase opacity-60 sm:text-sm lg:mb-6">
+                      Kontakt
+                    </span>
+                    <ul className="flex flex-col items-start gap-y-2">
+                      {contact.map((contactLink, i) => (
+                        <Link
+                          href={contactLink.href}
+                          key={i}
+                          i={i}
+                          hoverEffect="scale-down"
+                          className="sm:text-lg lg:text-xl"
+                        >
+                          {contactLink.label}
+                        </Link>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Sociální sítě */}
+                  <div className="col-span-1 lg:order-1 lg:col-span-2">
+                    <span className="mb-3 block text-xs uppercase opacity-60 sm:text-sm lg:mb-6">
+                      Sociální sítě
+                    </span>
+                    <ul className="flex flex-col items-start gap-y-2">
+                      {socials.map((social, i) => (
+                        <Link
+                          href={social.href}
+                          key={i}
+                          i={i}
+                          className="transition-colors duration-150 hover:text-primary sm:text-lg lg:text-xl"
+                        >
+                          {social.label}
+                        </Link>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </Container>
             </motion.div>
           </>
@@ -217,7 +248,7 @@ function TouchMenu() {
   );
 }
 
-export default function Navbar() {
+export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
@@ -247,9 +278,9 @@ export default function Navbar() {
     <header>
       <nav
         className={clsx(
-          "fixed inset-x-0 top-0 z-fixed w-screen transition duration-500 ease-out",
+          "z-fixed fixed inset-x-0 top-0 w-screen transition duration-500 ease-out",
           isScrolled &&
-            "bg-surface/80 shadow-xl backdrop-blur-md dark:shadow-none",
+            "bg-gray-50/80 shadow-2xl shadow-gray-700/10 backdrop-blur-md dark:bg-gray-900/80 dark:shadow-none",
           !isVisible && "-translate-y-full shadow-none"
         )}
       >
@@ -258,10 +289,10 @@ export default function Navbar() {
           className="flex items-center justify-between gap-4 py-5 sm:py-6"
         >
           {/* Logo */}
-          <div className="relative z-offcanvas-above mr-auto">
-            <Logo variant="light-background" className="dark:hidden" />
-            <Logo variant="dark-background" className="hidden dark:block" />
-          </div>
+          <Link href={"/"} className="z-offcanvas-above relative mr-auto">
+            <Logo background="light" className="dark:hidden" />
+            <Logo background="dark" className="hidden dark:block" />
+          </Link>
 
           {/* Desktop navigation */}
           <div className="absolute top-1/2 left-1/2 hidden -translate-x-1/2 -translate-y-1/2 lg:block">

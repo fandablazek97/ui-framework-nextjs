@@ -1,11 +1,14 @@
-import Container from "@components/Container";
-import Seo from "@components/Seo";
-import { type NextPage } from "next";
-
 import Alert from "@components/Alert";
+import Avatar from "@components/Avatar";
 import Badge from "@components/Badge";
-import ButtonNew from "@components/ButtonNew";
+import Button from "@components/Button";
 import Collapse from "@components/Collapse";
+import Container from "@components/Container";
+import Heading from "@components/Heading";
+import TextInput from "@components/inputs/TextInput";
+import Seo from "@components/Seo";
+import Tab from "@components/unstable/Tabs";
+import { type NextPage } from "next";
 
 // ToDo
 // - Update theme variables to be in production version
@@ -40,16 +43,6 @@ import Collapse from "@components/Collapse";
 // - - Form validation
 // - - Spam protection (recaptcha?)
 
-const variants = [
-  "filled",
-  "tinted",
-  "outlined",
-  "plain",
-  "destructive",
-  "gray",
-  "unstyled",
-];
-
 const Home: NextPage = () => {
   return (
     <>
@@ -58,103 +51,114 @@ const Home: NextPage = () => {
         description="Lorem ipsum dolor"
         noIndex={true}
       />
-      <div className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]">
-        <svg
-          className="relative left-[calc(50%-11rem)] -z-10 h-[21.1875rem] max-w-none -translate-x-1/2 rotate-[30deg] sm:left-[calc(50%-30rem)] sm:h-[42.375rem]"
-          viewBox="0 0 1155 678"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill="url(#45de2b6b-92d5-4d68-a6a0-9b9b2abad533)"
-            fillOpacity=".3"
-            d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
-          />
-          <defs>
-            <linearGradient
-              id="45de2b6b-92d5-4d68-a6a0-9b9b2abad533"
-              x1="1155.49"
-              x2="-78.208"
-              y1=".177"
-              y2="474.645"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="#9089FC" />
-              <stop offset={1} stopColor="#FF80B5" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-
-      <Container verticalPadding="xl" className="space-y-5">
-        <h1 className="text-body-rich text-4xl font-bold sm:text-6xl lg:text-9xl">
+      <Container py="xl" className="flex flex-col items-start justify-start">
+        <Heading level={2} size="2xl" color="gradient">
           Lorem ipsum dolor
-        </h1>
-        <p className="text-test max-w-prose pt-12 text-lg">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
-          provident recusandae labore praesentium esse ipsum ducimus aut ut
-          voluptatibus. Aspernatur!
-        </p>
-        <div className="space-x-2">
-          {variants.map((variant) => (
-            <ButtonNew key={variant} variant={variant}>
-              Button CTA
-            </ButtonNew>
-          ))}
+        </Heading>
+        <div className="flex flex-wrap gap-4 pt-8">
+          <Button>Button CTA</Button>
+          <Button intent="secondary">Button CTA</Button>
+          <Button intent="plain">Button CTA</Button>
+          <Button intent="destructive">Button CTA</Button>
+          <Button intent="gray">Button CTA</Button>
+          <Button intent="white">Button CTA</Button>
+          <Button intent="black">Button CTA</Button>
+        </div>
+        <div className="flex flex-wrap gap-4 pt-8">
+          <Badge>Badge</Badge>
+          <Badge color="secondary">Badge</Badge>
+          <Badge color="success">Badge</Badge>
+          <Badge color="warning">Badge</Badge>
+          <Badge color="error">Badge</Badge>
+          <Badge color="gray">Badge</Badge>
+        </div>
+        <div className="flex flex-wrap gap-4 pt-8">
+          <Badge intent="filled">Badge</Badge>
+          <Badge intent="filled" color="secondary">
+            Badge
+          </Badge>
+          <Badge intent="filled" color="success">
+            Badge
+          </Badge>
+          <Badge intent="filled" color="warning">
+            Badge
+          </Badge>
+          <Badge intent="filled" color="error">
+            Badge
+          </Badge>
+          <Badge intent="filled" color="gray">
+            Badge
+          </Badge>
+        </div>
+        <div className="flex flex-wrap gap-4 pt-8">
+          <Avatar.Group>
+            <Avatar name="Fanda Blažek" />
+            <Avatar name="Fanda Blažek" />
+            <Avatar name="Fanda Blažek" />
+          </Avatar.Group>
+          <Avatar.Group>
+            <Avatar
+              randomFallbackColor={false}
+              ringWidth="sm"
+              ringColor="primary"
+              name="Fanda Blažek"
+            />
+            <Avatar
+              randomFallbackColor={false}
+              ringWidth="sm"
+              ringColor="primary"
+              name="Fanda Blažek"
+            />
+            <Avatar
+              randomFallbackColor={false}
+              ringWidth="sm"
+              ringColor="primary"
+              name="Fanda Blažek"
+            />
+          </Avatar.Group>
         </div>
       </Container>
 
-      <Container verticalPadding="xl">
-        <Badge>Badge</Badge>
-        <Badge color="secondary">Badge</Badge>
-        <Badge color="success">Badge</Badge>
-        <Badge color="warning">Badge</Badge>
-        <Badge color="error">Badge</Badge>
-        <Badge color="neutral">Badge</Badge>
-        <Badge color="white">Badge</Badge>
-        <Badge color="black">Badge</Badge>
-      </Container>
-
-      <Container verticalPadding="xl" className="grid gap-5 md:grid-cols-2">
+      <Container py="md" className="grid gap-5 md:grid-cols-2">
         <div className="col-span-1 space-y-5">
-          <Alert status="success" title="Lorem ipsum dolor">
+          <Alert status="success">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero iusto
             dolorem quas magnam ducimus, id facilis aliquam tempora ipsum
             placeat.
           </Alert>
-          <Alert status="warning" title="Lorem ipsum dolor">
+          <Alert status="warning">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero iusto
             dolorem quas magnam ducimus, id facilis aliquam tempora ipsum
             placeat.
           </Alert>
-          <Alert status="error" title="Lorem ipsum dolor">
+          <Alert status="error">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero iusto
             dolorem quas magnam ducimus, id facilis aliquam tempora ipsum
             placeat.
           </Alert>
-          <Alert status="neutral" title="Lorem ipsum dolor">
+          <Alert status="neutral">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero iusto
             dolorem quas magnam ducimus, id facilis aliquam tempora ipsum
             placeat.
           </Alert>
         </div>
         <div className="col-span-1 space-y-5">
-          <Alert status="success" variant="tinted" title="Lorem ipsum dolor">
+          <Alert status="success" intent="filled" title="Lorem ipsum dolor">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero iusto
             dolorem quas magnam ducimus, id facilis aliquam tempora ipsum
             placeat.
           </Alert>
-          <Alert status="warning" variant="tinted" title="Lorem ipsum dolor">
+          <Alert status="warning" intent="filled" title="Lorem ipsum dolor">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero iusto
             dolorem quas magnam ducimus, id facilis aliquam tempora ipsum
             placeat.
           </Alert>
-          <Alert status="error" variant="tinted" title="Lorem ipsum dolor">
+          <Alert status="error" intent="filled" title="Lorem ipsum dolor">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero iusto
             dolorem quas magnam ducimus, id facilis aliquam tempora ipsum
             placeat.
           </Alert>
-          <Alert status="neutral" variant="tinted" title="Lorem ipsum dolor">
+          <Alert status="neutral" intent="filled" title="Lorem ipsum dolor">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero iusto
             dolorem quas magnam ducimus, id facilis aliquam tempora ipsum
             placeat.
@@ -162,29 +166,118 @@ const Home: NextPage = () => {
         </div>
       </Container>
 
-      <Container verticalPadding="xl" size="sm">
-        <Collapse.Group>
-          <Collapse title="Lorem ipsum dolor sit amet?">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem
-            aperiam optio sint porro facilis sit nam amet ducimus impedit
-            praesentium!
+      <Container py="md" className="grid gap-5 md:grid-cols-2">
+        <Collapse.Group className="col-span-1">
+          <Collapse
+            title="Lorem ipsum dolor sit amet consectetur adipisicing elit?"
+            isDefaultOpen
+          >
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit nam
+            ratione sed fuga laborum aliquid rem in tempora corrupti nisi
+            inventore blanditiis, omnis accusantium excepturi dolores neque
+            minima impedit nemo?
           </Collapse>
-          <Collapse title="Lorem ipsum dolor sit amet?">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem
-            aperiam optio sint porro facilis sit nam amet ducimus impedit
-            praesentium!
+          <Collapse title="Lorem ipsum dolor sit amet consectetur adipisicing elit?">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit nam
+            ratione sed fuga laborum aliquid rem in tempora corrupti nisi
+            inventore blanditiis, omnis accusantium excepturi dolores neque
+            minima impedit nemo?
           </Collapse>
-          <Collapse title="Lorem ipsum dolor sit amet?">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem
-            aperiam optio sint porro facilis sit nam amet ducimus impedit
-            praesentium!
-          </Collapse>
-          <Collapse title="Lorem ipsum dolor sit amet?">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem
-            aperiam optio sint porro facilis sit nam amet ducimus impedit
-            praesentium!
+          <Collapse title="Lorem ipsum dolor sit amet consectetur adipisicing elit?">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit nam
+            ratione sed fuga laborum aliquid rem in tempora corrupti nisi
+            inventore blanditiis, omnis accusantium excepturi dolores neque
+            minima impedit nemo?
           </Collapse>
         </Collapse.Group>
+        <Collapse.Group className="col-span-1">
+          <Collapse title="Lorem ipsum dolor sit amet consectetur adipisicing elit?">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit nam
+            ratione sed fuga laborum aliquid rem in tempora corrupti nisi
+            inventore blanditiis, omnis accusantium excepturi dolores neque
+            minima impedit nemo?
+          </Collapse>
+          <Collapse title="Lorem ipsum dolor sit amet consectetur adipisicing elit?">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit nam
+            ratione sed fuga laborum aliquid rem in tempora corrupti nisi
+            inventore blanditiis, omnis accusantium excepturi dolores neque
+            minima impedit nemo?
+          </Collapse>
+          <Collapse title="Lorem ipsum dolor sit amet consectetur adipisicing elit?">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit nam
+            ratione sed fuga laborum aliquid rem in tempora corrupti nisi
+            inventore blanditiis, omnis accusantium excepturi dolores neque
+            minima impedit nemo?
+          </Collapse>
+        </Collapse.Group>
+      </Container>
+
+      <Container size="sm" py="md">
+        <Tab.Group>
+          <Tab.List>
+            <Tab>Heading 1</Tab>
+            <Tab>Heading 2</Tab>
+            <Tab>Heading 3</Tab>
+          </Tab.List>
+          <Tab.Panels>
+            <Tab.Panel>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Aspernatur accusamus aliquid esse cum fugiat voluptatum temporibus
+              unde. Reprehenderit, iste tenetur.
+            </Tab.Panel>
+            <Tab.Panel>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
+              repellendus eum perspiciatis dolorem earum, perferendis, quas,
+              quam quis sed nam blanditiis assumenda tempore eveniet officia
+              alias? Laboriosam ipsam ipsa perspiciatis.
+            </Tab.Panel>
+            <Tab.Panel>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut
+              nostrum sequi id accusantium possimus tempore voluptates maxime in
+              consectetur. Vel doloremque consequuntur sed distinctio autem
+              minima magnam cum, cupiditate quibusdam, aperiam ratione corrupti
+              sunt hic tenetur molestias et. Soluta, voluptates?
+            </Tab.Panel>
+          </Tab.Panels>
+        </Tab.Group>
+      </Container>
+
+      <Container size="sm" py="md" className="space-y-5">
+        <TextInput
+          name="input"
+          placeholder="placeholder"
+          label="Label"
+          helperText="helper text"
+        />
+        <TextInput
+          name="input"
+          intent="outlined"
+          placeholder="placeholder"
+          label="Label"
+          helperText="helper text"
+        />
+        <TextInput
+          name="input"
+          isRequired
+          placeholder="placeholder"
+          label="Label"
+          helperText="helper text"
+        />
+        <TextInput
+          name="input"
+          isDisabled
+          placeholder="placeholder"
+          label="Label"
+          helperText="helper text"
+        />
+        <TextInput
+          name="input"
+          isInvalid
+          placeholder="placeholder"
+          label="Label"
+          helperText="helper text"
+          errorText="error text"
+        />
       </Container>
     </>
   );

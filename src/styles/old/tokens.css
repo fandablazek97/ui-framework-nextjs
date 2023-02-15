@@ -1,0 +1,77 @@
+:root {
+  /* Black & white */
+  --tk-white: 0deg 0% 100%;
+  --tk-black: 0deg 0% 0%;
+
+  /* Grays */
+  --tk-gray-50: var(--tk-gray-hue) 12% 98%;
+  --tk-gray-100: var(--tk-gray-hue) 8% 96%;
+  --tk-gray-200: var(--tk-gray-hue) 6% 90%;
+  --tk-gray-300: var(--tk-gray-hue) 4% 84%;
+  --tk-gray-400: var(--tk-gray-hue) 4% 65%;
+  --tk-gray-500: var(--tk-gray-hue) 4% 46%;
+  --tk-gray-600: var(--tk-gray-hue) 4% 34%;
+  --tk-gray-700: var(--tk-gray-hue) 6% 21%;
+  --tk-gray-800: var(--tk-gray-hue) 8% 14%;
+  --tk-gray-900: var(--tk-gray-hue) 10% 10%;
+
+  /* Primary */
+  --tk-primary-50: var(--tk-primary-hue) 100% 97%;
+  --tk-primary-100: var(--tk-primary-hue) 97% 92%;
+  --tk-primary-200: var(--tk-primary-hue) 95% 84%;
+  --tk-primary-300: var(--tk-primary-hue) 90% 74%;
+  --tk-primary-400: var(--tk-primary-hue) 85% 64%;
+  --tk-primary-500: var(--tk-primary-hue) 75% 56%;
+  --tk-primary-600: var(--tk-primary-hue) 65% 47%;
+  --tk-primary-700: var(--tk-primary-hue) 60% 38%;
+  --tk-primary-800: var(--tk-primary-hue) 55% 30%;
+  --tk-primary-900: var(--tk-primary-hue) 50% 23%;
+
+  /* Secondary */
+  --tk-secondary-50: var(--tk-secondary-hue) 100% 97%;
+  --tk-secondary-100: var(--tk-secondary-hue) 97% 92%;
+  --tk-secondary-200: var(--tk-secondary-hue) 95% 84%;
+  --tk-secondary-300: var(--tk-secondary-hue) 90% 74%;
+  --tk-secondary-400: var(--tk-secondary-hue) 85% 64%;
+  --tk-secondary-500: var(--tk-secondary-hue) 75% 56%;
+  --tk-secondary-600: var(--tk-secondary-hue) 65% 47%;
+  --tk-secondary-700: var(--tk-secondary-hue) 60% 38%;
+  --tk-secondary-800: var(--tk-secondary-hue) 55% 30%;
+  --tk-secondary-900: var(--tk-secondary-hue) 50% 23%;
+
+  /* Success */
+  --tk-success-50: var(--tk-success-hue) 100% 97%;
+  --tk-success-100: var(--tk-success-hue) 97% 92%;
+  --tk-success-200: var(--tk-success-hue) 95% 84%;
+  --tk-success-300: var(--tk-success-hue) 90% 74%;
+  --tk-success-400: var(--tk-success-hue) 85% 64%;
+  --tk-success-500: var(--tk-success-hue) 75% 56%;
+  --tk-success-600: var(--tk-success-hue) 65% 47%;
+  --tk-success-700: var(--tk-success-hue) 60% 38%;
+  --tk-success-800: var(--tk-success-hue) 55% 30%;
+  --tk-success-900: var(--tk-success-hue) 50% 23%;
+
+  /* Warning */
+  --tk-warning-50: var(--tk-warning-hue) 100% 97%;
+  --tk-warning-100: var(--tk-warning-hue) 97% 92%;
+  --tk-warning-200: var(--tk-warning-hue) 95% 84%;
+  --tk-warning-300: var(--tk-warning-hue) 90% 74%;
+  --tk-warning-400: var(--tk-warning-hue) 85% 64%;
+  --tk-warning-500: var(--tk-warning-hue) 75% 56%;
+  --tk-warning-600: var(--tk-warning-hue) 65% 47%;
+  --tk-warning-700: var(--tk-warning-hue) 60% 38%;
+  --tk-warning-800: var(--tk-warning-hue) 55% 30%;
+  --tk-warning-900: var(--tk-warning-hue) 50% 23%;
+
+  /* Error */
+  --tk-error-50: var(--tk-error-hue) 100% 97%;
+  --tk-error-100: var(--tk-error-hue) 97% 92%;
+  --tk-error-200: var(--tk-error-hue) 95% 84%;
+  --tk-error-300: var(--tk-error-hue) 90% 74%;
+  --tk-error-400: var(--tk-error-hue) 85% 64%;
+  --tk-error-500: var(--tk-error-hue) 75% 56%;
+  --tk-error-600: var(--tk-error-hue) 65% 47%;
+  --tk-error-700: var(--tk-error-hue) 60% 38%;
+  --tk-error-800: var(--tk-error-hue) 55% 30%;
+  --tk-error-900: var(--tk-error-hue) 50% 23%;
+}

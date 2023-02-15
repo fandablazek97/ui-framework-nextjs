@@ -52,7 +52,7 @@ type LinkProps = React.ComponentProps<typeof AnchorOrLink> & {
 };
 
 const componentVariants = {
-  root: "relative group/link h-max",
+  root: "relative group/link h-max max-w-max",
   color: {
     inherit: "",
     primary: "text-primary",
@@ -101,7 +101,7 @@ export default function Link({
         <span className={clsx(componentVariants.hoverEffect[hoverEffect])} />
       )}
       {hoverEffect === "slide-back" && (
-        <span className="absolute inset-x-0 top-[92%] h-[0.0625em] w-full origin-right scale-x-0 transform-gpu bg-current opacity-60 transition-transform duration-300 ease-out-circ group-hover/link:origin-left group-hover/link:scale-x-100 group-hover/link:delay-300" />
+        <span className="ease-out-circ absolute inset-x-0 top-[92%] h-[0.0625em] w-full origin-right scale-x-0 transform-gpu bg-current opacity-60 transition-transform duration-300 group-hover/link:origin-left group-hover/link:scale-x-100 group-hover/link:delay-300" />
       )}
       {children}
     </AnchorOrLink>

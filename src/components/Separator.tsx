@@ -4,7 +4,7 @@ import clsx from "clsx";
 
 type SeparatorProps = {
   orientation?: "horizontal" | "vertical";
-  color?: "inherit" | "primary" | "secondary" | "neutral" | "white" | "black";
+  color?: "inherit" | "primary" | "secondary" | "white" | "black";
   disableOpacity?: boolean;
   isDecorative?: boolean;
   className?: string;
@@ -24,7 +24,6 @@ const componentVariants = {
     inherit: "bg-current",
     primary: "bg-primary",
     secondary: "bg-secondary",
-    neutral: "bg-neutral",
     white: "bg-white",
     black: "bg-black",
   },

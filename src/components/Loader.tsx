@@ -14,7 +14,9 @@ type LoaderProps = {
     | "success"
     | "warning"
     | "error"
-    | "neutral";
+    | "gray"
+    | "white"
+    | "black";
 };
 
 // Component Variant Styles
@@ -43,7 +45,9 @@ const componentVariants = {
     success: "border-success",
     warning: "border-warning",
     error: "border-error",
-    neutral: "border-neutral",
+    gray: "border-gray-600 dark:border-gray-400",
+    white: "border-white",
+    black: "border-gray-900",
   },
 };
 

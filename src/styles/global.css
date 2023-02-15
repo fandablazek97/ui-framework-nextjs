@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+@layer base {
+  html {
+    @apply scroll-pt-28 scroll-smooth font-sans accent-primary selection:bg-primary/80 selection:text-white;
+  }
+
+  body {
+    @apply overflow-x-hidden bg-gray-50 text-gray-600 dark:bg-gray-900 dark:text-gray-200;
+  }
+}
+
+/* @layer components {
+  ...
+} */
+
+/* @layer utilities {
+  ...
+} */

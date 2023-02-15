@@ -1,5 +1,5 @@
 import Favicon from "@components/Favicon";
-import Navbar from "@components/unstable/Navbar";
+import Header from "@components/unstable/Header";
 import NextHead from "next/head";
 import ScrollToTop from "./ScrollToTop";
 
@@ -19,7 +19,7 @@ export default function Layout({ children }: LayoutProps) {
         />
       </NextHead>
       <header>
-        <Navbar />
+        <Header />
       </header>
       <main id="content">{children}</main>
       <ScrollToTop />

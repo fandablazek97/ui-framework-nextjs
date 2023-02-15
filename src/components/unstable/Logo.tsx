@@ -3,34 +3,39 @@
 
 export function Logomark(...props: any) {
   return (
-    <div style={{ width: "50px", height: "50px" }} {...props}>
-      <img src="/logo/logo-mark.svg" alt="Logo značky" width="70" height="76" />
+    <div style={{ width: "60px", height: "60px" }} {...props}>
+      <img
+        src="/logo/brand-symbol.svg"
+        alt="Logo značky"
+        width="60"
+        height="60"
+      />
     </div>
   );
 }
 
 export function Logo({
-  variant = "light-background",
+  background = "light",
   ...props
 }: {
-  variant?: "light-background" | "dark-background";
+  background?: "light" | "dark";
   [x: string]: any;
 }) {
   return (
-    <div style={{ width: "110px", height: "21px" }} {...props}>
-      {variant === "light-background" ? (
+    <div style={{ width: "160px", height: "36px" }} {...props}>
+      {background === "light" ? (
         <img
-          src="/logo/logo-lb.svg"
+          src="/logo/brand-logo-light-bg.svg"
           alt="Logo značky"
-          width="110"
-          height="21"
+          width="160"
+          height="36"
         />
       ) : (
         <img
-          src="/logo/logo-db.svg"
+          src="/logo/brand-logo-dark-bg.svg"
           alt="Logo značky"
-          width="110"
-          height="21"
+          width="160"
+          height="36"
         />
       )}
     </div>
