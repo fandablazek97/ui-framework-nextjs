@@ -11,7 +11,6 @@ import Tab from "@components/unstable/Tabs";
 import { type NextPage } from "next";
 
 // ToDo
-// - Update theme variables to be in production version
 // - Resolve all unstable components and make them stable
 // - Add i18n support (probably react-i18next)
 // - Write global config for cookies, gdpr and other stuff
@@ -243,15 +242,10 @@ const Home: NextPage = () => {
       </Container>
 
       <Container size="sm" py="md" className="space-y-5">
+        <TextInput name="input" placeholder="placeholder" label="Label" />
         <TextInput
           name="input"
-          placeholder="placeholder"
-          label="Label"
-          helperText="helper text"
-        />
-        <TextInput
-          name="input"
-          intent="outlined"
+          intent="filled"
           placeholder="placeholder"
           label="Label"
           helperText="helper text"
@@ -265,7 +259,6 @@ const Home: NextPage = () => {
         />
         <TextInput
           name="input"
-          isDisabled
           placeholder="placeholder"
           label="Label"
           helperText="helper text"
